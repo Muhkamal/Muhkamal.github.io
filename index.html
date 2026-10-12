@@ -1,0 +1,1208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Data science and Python portfolio of Muhammed Kamaldeen: eight projects in data analysis, automation, machine learning and web apps, with code on GitHub.">
+<title>Muhammed Kamaldeen | Data Science Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,600..900&family=Source+Serif+4:opsz,wght@8..60,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a lab-report page. One hero where 178 real data points hover, then a ruled index and five case studies with a sticky fact column. */
+:root {
+  --paper: #eceee9;
+  --plate: #f7f8f5;
+  --ink: #14181b;
+  --muted: #566068;
+  --rule: #c9cfca;
+  --blue: #2740e6;
+  --orange: #e8581c;
+  --green: #0f8f69;
+  --code-bg: #14191d;
+  --code-ink: #dce3de;
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e1215;
+    --plate: #151b1f;
+    --ink: #e8ebe6;
+    --muted: #97a19b;
+    --rule: #29313a;
+    --blue: #8494ff;
+    --orange: #ff8a52;
+    --green: #3fcf9f;
+    --code-bg: #0a0e11;
+    --code-ink: #dce3de;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e1215;
+  --plate: #151b1f;
+  --ink: #e8ebe6;
+  --muted: #97a19b;
+  --rule: #29313a;
+  --blue: #8494ff;
+  --orange: #ff8a52;
+  --green: #3fcf9f;
+  --code-bg: #0a0e11;
+  --code-ink: #dce3de;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 400 17px/1.62 var(--serif); margin: 0; }
+.page { max-width: 1200px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 16px 72px; }
+h1, h2, h3, h4, p, dl, dd, figure, ol, ul { margin: 0; padding: 0; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.disp { font-family: var(--display); font-stretch: 70%; font-weight: 800; text-transform: uppercase; letter-spacing: 0.005em; }
+.mono { font-family: var(--mono); }
+
+/* top bar */
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 14px 24px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid var(--ink); }
+.brand { font-size: 1.35rem; line-height: 1; }
+.bar nav { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; font: 500 13px var(--mono); }
+.bar nav a { text-decoration: none; border-bottom: 1px solid transparent; }
+.bar nav a:hover { border-color: var(--ink); }
+.switch { display: inline-flex; align-items: center; gap: 10px; background: none; border: 0; padding: 4px 0; color: var(--ink); font: 500 13px var(--mono); cursor: pointer; }
+.switch .track { width: 42px; height: 22px; border: 1.5px solid var(--ink); border-radius: 11px; position: relative; flex: none; }
+.switch .thumb { position: absolute; top: 2.5px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); transition: transform 0.25s ease; }
+html.grounded .switch .thumb { transform: translateX(19px); }
+
+/* hero */
+.hero { padding-block: clamp(28px, 6vw, 64px) 0; }
+.hero h1 { font-size: clamp(2.5rem, 8vw, 6.3rem); line-height: 0.93; max-width: 16ch; text-wrap: balance; }
+.hero .sub { margin-top: clamp(18px, 3vw, 30px); max-width: 52ch; font-size: 1.18rem; color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px clamp(20px, 5vw, 56px); margin-top: 26px; }
+.facts div { min-width: 0; }
+.facts dt { font: 400 12px var(--mono); color: var(--muted); }
+.facts dd { font: 500 15px var(--mono); }
+.field { position: relative; margin-top: clamp(26px, 4vw, 44px); border-block: 1px solid var(--rule); background: var(--plate); }
+#field { display: block; width: 100%; height: clamp(270px, 36vw, 390px); }
+.field-cap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 12px; font: 400 13px/1.5 var(--mono); color: var(--muted); }
+.field-cap p { max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.sw { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex: none; }
+.sw.a { background: var(--blue); } .sw.b { background: var(--orange); } .sw.c { background: var(--green); } .sw.g { background: var(--muted); }
+
+/* index */
+.sec-title { font-size: clamp(2rem, 6vw, 3.6rem); line-height: 1; }
+.work { padding-top: clamp(56px, 9vw, 104px); }
+.work > p { margin-top: 12px; color: var(--muted); max-width: 56ch; }
+.index { list-style: none; margin-top: 28px; border-bottom: 1px solid var(--ink); }
+.index li { border-top: 1px solid var(--ink); }
+.index a { display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.3fr) minmax(0, 1.2fr) minmax(0, 2.4fr); gap: 6px 24px; padding: 18px 8px; text-decoration: none; align-items: baseline; }
+.index a:hover { background: var(--plate); }
+.index .name { font-family: var(--display); font-stretch: 78%; font-weight: 800; text-transform: uppercase; font-size: 1.5rem; line-height: 1.05; }
+.index .kind, .index .data { font: 400 13px/1.4 var(--mono); color: var(--muted); }
+.index .res { font-size: 15.5px; line-height: 1.45; }
+@media (max-width: 860px) {
+  .index a { grid-template-columns: 1fr; padding-inline: 0; }
+}
+
+/* case studies */
+.study { display: grid; grid-template-columns: minmax(0, 290px) minmax(0, 1fr); gap: clamp(26px, 5vw, 72px); padding-block: clamp(44px, 7vw, 80px); border-top: 1px solid var(--ink); margin-top: clamp(44px, 7vw, 80px); }
+.study:first-of-type { margin-top: clamp(32px, 5vw, 56px); }
+.study > * { min-width: 0; }
+.facts-col { align-self: start; position: sticky; top: 20px; display: grid; gap: 22px; }
+.facts-col dt { font: 400 12px var(--mono); color: var(--muted); }
+.facts-col dd { font: 400 14.5px/1.45 var(--serif); margin-top: 2px; }
+.sim { color: var(--orange); font-weight: 600; }
+.repo { font: 400 12.5px/1.4 var(--mono); overflow-wrap: anywhere; text-underline-offset: 3px; }
+.nums { display: grid; gap: 14px; padding-top: 18px; border-top: 1px solid var(--rule); }
+.nums div { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline; }
+.nums b { font: 800 2.6rem/1 var(--display); font-stretch: 70%; font-variant-numeric: tabular-nums; }
+.nums span { font: 400 12.5px/1.35 var(--mono); color: var(--muted); }
+@media (max-width: 860px) {
+  .study { grid-template-columns: 1fr; }
+  .facts-col { position: static; }
+  .nums { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+  .nums div { grid-template-columns: 1fr; gap: 2px; }
+}
+.study h3 { font-size: clamp(2.2rem, 5.6vw, 3.8rem); line-height: 0.98; text-wrap: balance; }
+.lead { margin-top: 18px; font-size: 1.2rem; line-height: 1.55; max-width: 60ch; }
+.body { display: grid; gap: 18px; margin-top: 30px; max-width: 64ch; }
+.body h4 { font: 500 12px var(--mono); color: var(--muted); letter-spacing: 0.04em; margin-bottom: -8px; }
+.figs { display: grid; gap: 22px; margin-top: 30px; }
+.figs.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.plate { background: var(--plate); border: 1px solid var(--rule); padding: 14px 14px 12px; min-width: 0; }
+.plate figcaption { margin-top: 10px; font: 400 12.5px/1.5 var(--mono); color: var(--muted); }
+svg.fig { display: block; width: 100%; height: auto; }
+svg.fig text { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+svg.fig .tt { font-size: 11.5px; }
+svg.fig .ink { fill: var(--ink); font-weight: 500; }
+svg.fig .gl { stroke: var(--rule); stroke-width: 1; fill: none; }
+svg.fig .base { stroke: var(--ink); stroke-width: 1; }
+svg.fig .ln { fill: none; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.c-blue { stroke: var(--blue); } .c-orange { stroke: var(--orange); } .c-green { stroke: var(--green); }
+.f-blue { fill: var(--blue); } .f-orange { fill: var(--orange); } .f-green { fill: var(--green); }
+.tblwrap { overflow-x: auto; margin-top: 22px; max-width: 100%; }
+table { border-collapse: collapse; width: 100%; font: 400 12px/1.4 var(--mono); font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:last-child, td:last-child { padding-right: 0; }
+th:first-child, td:first-child { text-align: left; position: relative; }
+thead th { font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--ink); }
+tr.best td { font-weight: 500; }
+tr.best td:first-child::before { content: "\25B8"; color: var(--orange); position: absolute; left: -11px; }
+details { margin-top: 26px; max-width: 100%; }
+summary { font: 500 13px var(--mono); cursor: pointer; padding: 6px 0; }
+pre.code { margin: 10px 0 0; padding: 18px 20px; background: var(--code-bg); color: var(--code-ink); font: 400 13px/1.65 var(--mono); overflow-x: auto; max-width: 100%; }
+
+/* services and process */
+.services, .process { padding-top: clamp(56px, 9vw, 104px); }
+.process { padding-bottom: clamp(56px, 9vw, 96px); }
+.rules, .steps { list-style: none; margin-top: 28px; border-bottom: 1px solid var(--ink); }
+.rules li, .steps li { border-top: 1px solid var(--ink); padding: 18px 0; display: grid; gap: 6px 32px; align-items: baseline; }
+.rules li { grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr); }
+.rules b, .steps b { font-family: var(--display); font-stretch: 78%; font-weight: 800; text-transform: uppercase; font-size: 1.45rem; line-height: 1.1; }
+.rules span, .steps span { font-size: 16.5px; line-height: 1.5; max-width: 58ch; }
+.steps { counter-reset: s; }
+.steps li { grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1.9fr); }
+.steps li::before { counter-increment: s; content: counter(s); font: 800 2.3rem/1 var(--display); font-stretch: 70%; color: var(--orange); font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) {
+  .rules li { grid-template-columns: 1fr; }
+  .steps li { grid-template-columns: 38px minmax(0, 1fr); gap: 4px 12px; }
+  .steps span { grid-column: 2; }
+}
+
+/* contact */
+.contact { border-top: 1px solid var(--ink); padding-top: clamp(40px, 6vw, 72px); display: grid; gap: 18px; justify-items: start; }
+.contact h2 { font-size: clamp(2.4rem, 8vw, 6rem); line-height: 0.94; max-width: 14ch; text-wrap: balance; }
+.contact p { max-width: 54ch; font-size: 1.12rem; color: var(--muted); }
+.reach { display: grid; gap: 16px; max-width: 100%; }
+.reach > div { min-width: 0; }
+.reach dt { font: 400 12px var(--mono); color: var(--muted); }
+.reach dd { font: 500 clamp(1rem, 3.6vw, 1.35rem)/1.4 var(--mono); overflow-wrap: anywhere; }
+.reach a { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.cp { font: 500 12px var(--mono); color: var(--ink); background: none; border: 1.5px solid var(--ink); padding: 3px 10px; margin-left: 6px; cursor: pointer; vertical-align: middle; }
+.cp:hover { background: var(--ink); color: var(--paper); }
+.about { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--rule); font: 400 13px/1.6 var(--mono); color: var(--muted); max-width: 90ch; }
+
+.see { display: block; margin-top: 8px; font: 400 13px/1.5 var(--mono); font-style: normal; color: var(--muted); }
+.see a { color: var(--ink); text-underline-offset: 3px; }
+tr.me td { color: var(--orange); font-weight: 500; }
+svg.fig .gdot { fill: var(--muted); fill-opacity: 0.55; }
+svg.fig .adot { fill: var(--blue); fill-opacity: 0.8; }
+.plate.nobox { padding: 0; border: 0; background: none; }
+table.wrap th, table.wrap td { white-space: normal; vertical-align: top; }
+th.l, td.l { text-align: left; }
+.app { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 30px clamp(24px, 5vw, 56px); padding: clamp(16px, 3vw, 30px); background: var(--plate); border: 1px solid var(--ink); }
+.app > * { min-width: 0; }
+.app-in { display: grid; gap: 16px; align-content: start; }
+.app .presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.app .presets button { font: 500 12px var(--mono); color: var(--ink); background: none; border: 1.5px solid var(--ink); padding: 6px 12px; cursor: pointer; }
+.app .presets button:hover { background: var(--ink); color: var(--paper); }
+.app .fld { display: grid; gap: 6px; min-width: 0; }
+.app .fld label { display: flex; justify-content: space-between; gap: 10px; font: 500 12px var(--mono); color: var(--muted); }
+.app .fld output { color: var(--ink); font-variant-numeric: tabular-nums; }
+.app select, .app input[type="number"] { width: 100%; font: 400 15px var(--mono); color: var(--ink); background: var(--paper); border: 1.5px solid var(--ink); border-radius: 0; padding: 9px 10px; }
+.app input[type="range"] { width: 100%; accent-color: var(--orange); margin: 4px 0; }
+.app .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.app .chk { display: flex; align-items: center; gap: 10px; font: 400 14px var(--mono); cursor: pointer; }
+.app .chk input { width: 18px; height: 18px; accent-color: var(--orange); flex: none; }
+.app select:focus-visible, .app input:focus-visible, .app button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.app .cap { font: 400 12px var(--mono); color: var(--muted); }
+.app .score { display: flex; align-items: baseline; gap: 12px; margin-top: 2px; }
+.app .score b { font: 800 clamp(3.4rem, 9vw, 5rem)/1 var(--display); font-stretch: 70%; font-variant-numeric: tabular-nums; }
+.app .score span { font: 400 13px var(--mono); color: var(--muted); }
+.app .meter { position: relative; height: 14px; background: var(--rule); margin: 34px 0 6px; }
+.app .meter i { display: block; height: 100%; width: 0; background: var(--green); transition: width 0.25s ease; }
+.app .meter.hot i { background: var(--orange); }
+.app .meter u { position: absolute; top: -8px; bottom: -8px; width: 2px; background: var(--ink); text-decoration: none; }
+.app .meter em { position: absolute; bottom: calc(100% + 4px); left: 0; transform: translateX(-50%); font: 400 11px var(--mono); font-style: normal; white-space: nowrap; color: var(--ink); }
+.app .verdict { font-size: 1.05rem; line-height: 1.45; min-height: 3em; }
+.app .verdict b { font-weight: 700; }
+.app .why { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 12px; }
+.app .why li { display: grid; gap: 5px; }
+.app .why .row { display: flex; justify-content: space-between; gap: 10px; font: 400 12.5px/1.3 var(--mono); }
+.app .why .tag { color: var(--muted); white-space: nowrap; }
+.app .bar { position: relative; height: 10px; }
+.app .bar::before { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: var(--ink); }
+.app .bar i { position: absolute; top: 0; bottom: 0; }
+.app .up i { left: 50%; background: var(--orange); }
+.app .down i { right: 50%; background: var(--green); }
+.app .fine { margin-top: 14px; font: 400 12px/1.5 var(--mono); color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .app .meter i { transition: none; } }
+
+@media (prefers-reduced-motion: reduce) { .switch .thumb { transition: none; } }
+@media (max-width: 420px) { body { font-size: 16.5px; } .nums b { font-size: 2.3rem; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="bar">
+    <span class="brand disp" id="brand">Portfolio</span>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+      <button class="switch" id="gsw" type="button" role="switch" aria-checked="false">
+        <span class="track"><span class="thumb"></span></span><span>Gravity <span id="gstate">off</span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1 class="disp">I build models that turn raw data into decisions.</h1>
+    <p class="sub">Eight projects in Python: data analysis on real Nigeria data, report automation, machine learning, and a web app that runs a trained model in the browser. Every number on this page comes from the code in the project files.</p>
+    <dl class="facts">
+      <div><dt>Projects</dt><dd>8</dd></div>
+      <div><dt>Tools</dt><dd>Python, pandas, scikit-learn, JavaScript</dd></div>
+      <div><dt>Data</dt><dd>4 real public datasets, 4 simulated</dd></div>
+    </dl>
+    <div class="field"><canvas id="field" role="img" aria-label="178 wines plotted by chemistry as floating dots, coloured by cluster. With gravity on they fall into a histogram of alcohol content."></canvas></div>
+    <div class="field-cap">
+      <p id="fcap">178 real wines placed by their chemistry. Each colour is a group the model found without being told the answer. Switch gravity on to drop them.</p>
+      <div class="legend" aria-hidden="true"><span><i class="sw a"></i>Cluster A</span><span><i class="sw b"></i>Cluster B</span><span><i class="sw c"></i>Cluster C</span></div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <h2 class="sec-title disp">What I can do for you</h2>
+    <ul class="rules">
+      <li><b>Python and data analysis</b><span>Messy spreadsheets and CSV files cleaned, analysed and explained in plain language, with charts and a short report. Prediction models in scikit-learn when the question calls for one.<em class="see">See <a href="#nigeria">Nigeria analysis</a>, <a href="#retail">sales analysis</a>, <a href="#diab">diabetes model</a>, <a href="#wine">wine clustering</a></em></span></li>
+      <li><b>Python automation</b><span>Repetitive spreadsheet work turned into a script you run with one command. It cleans the file, builds the summaries and writes a formatted Excel report with a log of every change.<em class="see">See <a href="#auto">sales report automation</a></em></span></li>
+      <li><b>Web and ML applications</b><span>Trained models put into a web page anyone can use, with no server needed. Also clean one-page sites and small web tools in HTML, CSS and JavaScript.<em class="see">See <a href="#app">churn risk checker</a> and this page</em></span></li>
+    </ul>
+  </section>
+
+  <section class="work" id="work">
+    <h2 class="sec-title disp">Work</h2>
+    <p>Tools and business projects first, then analysis and method projects on public data. Each row opens the full case study below.</p>
+    <ol class="index">
+      <li><a href="#retail"><span class="name">Lagos retail sales analysis</span><span class="kind">Data cleaning and analysis</span><span class="data">Simulated</span><span class="res">₦2.36B analysed. December runs 42.7% above November.</span></a></li>
+      <li><a href="#nigeria"><span class="name">Nigeria in the Gapminder data</span><span class="kind">Python and data analysis</span><span class="data">Real public data</span><span class="res">Life expectancy stopped rising after 1987 and sits 12.9 years below what Nigeria's income predicts.</span></a></li>
+      <li><a href="#auto"><span class="name">Sales report automation</span><span class="kind">Python automation</span><span class="data">Simulated</span><span class="res">One command turns a raw CSV into a formatted Excel report, with every fix logged.</span></a></li>
+      <li><a href="#churn"><span class="name">Telecom churn prediction</span><span class="kind">Classification and decision cost</span><span class="data">Simulated</span><span class="res">Alert threshold set by naira cost, 7.9% cheaper than doing nothing.</span></a></li>
+      <li><a href="#app"><span class="name">Churn risk checker</span><span class="kind">Web and ML application</span><span class="data">Simulated</span><span class="res">The churn model running live in the browser, matching scikit-learn on all 25 test customers.</span></a></li>
+      <li><a href="#bc"><span class="name">Breast cancer classifier</span><span class="kind">Classification</span><span class="data">Public benchmark</span><span class="res">Test AUC 0.996. Found 39 of 42 malignant cases with 1 false alarm.</span></a></li>
+      <li><a href="#diab"><span class="name">Diabetes progression model</span><span class="kind">Regression</span><span class="data">Public benchmark</span><span class="res">Explains about 48% of the variation and cuts error 27% against guessing the average.</span></a></li>
+      <li><a href="#wine"><span class="name">Wine clustering</span><span class="kind">Unsupervised learning</span><span class="data">Public benchmark</span><span class="res">Three groups found without labels match the real cultivars (adjusted Rand 0.90).</span></a></li>
+    </ol>
+
+    <article class="study" id="retail">
+      <dl class="facts-col">
+        <div><dt>Kind</dt><dd>Data cleaning and analysis</dd></div>
+        <div><dt>Data</dt><dd><span class="sim">Simulated.</span> 13,165 rows, 6 branches, 6 categories, all of 2025.</dd></div>
+        <div><dt>Tools</dt><dd>Python, pandas, Matplotlib</dd></div>
+        <div><dt>Code</dt><dd><a class="repo" href="https://github.com/Muhkamal/lagos-retail-analysis" target="_blank" rel="noopener">github.com/Muhkamal/lagos-retail-analysis</a></dd></div>
+        <div class="nums">
+          <div><b>₦2.36B</b><span>revenue analysed</span></div>
+          <div><b>+42.7%</b><span>December over November</span></div>
+          <div><b>+23.7%</b><span>weekend lift per day</span></div>
+        </div>
+      </dl>
+      <div>
+        <h3 class="disp">Lagos retail sales analysis</h3>
+        <p class="lead">A fictional six-branch supermarket chain with a deliberately messy 2025 sales file, containing duplicates, missing unit counts, negative revenue and inconsistent branch names. I cleaned it, then asked what drives revenue.</p>
+        <div class="figs">
+          <figure class="plate"><div id="fig-retail"></div>
+            <figcaption>Figure 5. Revenue by month in ₦ millions. December is highlighted.</figcaption></figure>
+        </div>
+        <div class="body">
+          <h4>What I found</h4>
+          <p>Cleaning removed 25 duplicate rows, rebuilt 20 missing unit counts from revenue and price, corrected 10 negative revenue entries and standardised the branch names, taking 13,165 rows down to 13,140. Total revenue is ₦2.36 billion. December is the peak at ₦267M. Weekends earn 23.7% more per day than weekdays. Victoria Island leads with 20.0% of sales and Ajah trails with 13.1%, about ₦164M a year behind. Electronics is the top category at 26.2% of revenue from the fewest units.</p>
+          <h4>Where it falls short</h4>
+          <p>The file is simulated. Discounts showed no lift in units sold, but they were assigned at random, so a flat result is expected here. On real data that is the first thing I would test properly.</p>
+        </div>
+        <details><summary>Show the core code</summary><pre class="code"><code>df = raw.drop_duplicates().copy()
+df["branch"] = df["branch"].str.strip().str.title()
+
+# rebuild missing unit counts from revenue and price
+rebuild = df["units_sold"].isna()
+df.loc[rebuild, "units_sold"] = (
+    df.loc[rebuild, "revenue_ngn"].abs()
+    / (df.loc[rebuild, "unit_price_ngn"] * (1 - df.loc[rebuild, "discount"]))
+).round()
+
+# negative revenue is a data entry error
+df["revenue_ngn"] = df["revenue_ngn"].abs()</code></pre></details>
+      </div>
+    </article>
+
+    <article class="study" id="nigeria">
+      <dl class="facts-col">
+        <div><dt>Kind</dt><dd>Python and data analysis</dd></div>
+        <div><dt>Data</dt><dd>Real public data. Gapminder: 142 countries, one row every five years from 1952 to 2007. The data ends in 2007.</dd></div>
+        <div><dt>Tools</dt><dd>Python, pandas, NumPy, Matplotlib</dd></div>
+        <div class="nums">
+          <div><b>46.9</b><span>years of life expectancy in 1987, and the same in 2007</span></div>
+          <div><b>-12.9</b><span>years below what Nigeria's income predicts</span></div>
+          <div><b>4.1×</b><span>population growth, 1952 to 2007</span></div>
+        </div>
+      </dl>
+      <div>
+        <h3 class="disp">Nigeria in the Gapminder data</h3>
+        <p class="lead">How did Nigeria's life expectancy, income and population change from 1952 to 2007, and how does that compare with Africa and the world? Then a harder question: does income explain the gap? This is real data, so the answers are about what happened and not about what I would have liked to find.</p>
+        <div class="figs two">
+          <figure class="plate"><div id="fig-life"></div>
+            <div class="legend" style="margin-top:8px;font:400 12px var(--mono);color:var(--muted)"><span><i class="sw b"></i>Nigeria</span><span><i class="sw a"></i>Africa median</span><span><i class="sw g"></i>World median</span></div>
+            <figcaption>Figure 8. Life expectancy at birth. Nigeria rose from 36.3 to 46.9 years by 1987, then stayed there. The African median kept rising.</figcaption></figure>
+          <figure class="plate"><div id="fig-income"></div>
+            <div class="legend" style="margin-top:8px;font:400 12px var(--mono);color:var(--muted)"><span><i class="sw b"></i>Nigeria</span><span><i class="sw a"></i>Other African countries</span><span><i class="sw g"></i>Rest of the world</span></div>
+            <figcaption>Figure 9. Income and life expectancy for 142 countries in 2007, income on a log scale. The line is the fitted trend. Nigeria sits far below it.</figcaption></figure>
+        </div>
+        <div class="figs">
+          <figure class="plate"><div class="tblwrap" style="margin-top:0"><table>
+            <thead><tr><th>Country</th><th>Income per person</th><th>Life expectancy</th></tr></thead>
+            <tbody><tr><td>Vietnam</td><td>$2,442</td><td>74.2</td></tr><tr><td>Nicaragua</td><td>$2,749</td><td>72.9</td></tr><tr><td>Korea, Dem. Rep.</td><td>$1,593</td><td>67.3</td></tr><tr><td>Sao Tome and Principe</td><td>$1,598</td><td>65.5</td></tr><tr><td>Pakistan</td><td>$2,606</td><td>65.5</td></tr><tr><td>India</td><td>$2,452</td><td>64.7</td></tr><tr class="me"><td>Nigeria</td><td>$2,014</td><td>46.9</td></tr></tbody></table></div>
+            <figcaption>Table 6. Nigeria and the six longest-lived of the 18 countries with a similar income in 2007 (within 30% below to 40% above Nigeria's). Income is in international dollars.</figcaption></figure>
+        </div>
+        <div class="body">
+          <h4>What I found</h4>
+          <p>Nigeria's life expectancy rose 10.5 years between 1952 and 1987, then did not move: 46.9 in 1987 and 46.9 in 2007. The African median rose another 1.3 years over the same twenty years, and by 2007 stood at 52.9, with the world median at 71.9. Population grew 4.1 times (33 million to 135 million, about 2.6% a year, the same pace as Africa overall) and income per person grew 1.9 times, close to the African median of 1.75 times.</p>
+          <p>Across 142 countries in 2007, every doubling of income goes with about 5.0 more years of life expectancy (95% range 4.5 to 5.5, R² 0.65). At Nigeria's income of $2,014 that line predicts 59.7 years. Nigeria's actual figure is 46.9, which is 12.9 years below the line and the 10th largest shortfall of the 142 countries. Countries at similar income, such as Vietnam, Nicaragua and India, live far longer.</p>
+          <h4>Where it falls short</h4>
+          <p>The data stops in 2007, so this describes a long period and not Nigeria today. It shows what happened, not why. It cannot say what held life expectancy back after 1987, and a trend fitted across countries is not a promise about what would happen to one country if its income rose. Income is a national average and says nothing about how it is shared. Values are Gapminder estimates at five-year steps.</p>
+        </div>
+        <details><summary>Show the core code</summary><pre class="code"><code>d07 = g[g.year == 2007].copy()
+slope, intercept = np.polyfit(d07["log_gdp"], d07["lifeExp"], 1)
+d07["pred"] = intercept + slope * d07["log_gdp"]
+d07["resid"] = d07["lifeExp"] - d07["pred"]
+r2 = 1 - (d07["resid"] ** 2).sum() / ((d07["lifeExp"] - d07["lifeExp"].mean()) ** 2).sum()
+nig_row = d07[d07.country == "Nigeria"].iloc[0]
+resid_rank = int((d07["resid"] &lt; nig_row["resid"]).sum()) + 1  # 1 = furthest below the line
+# life expectancy gain per doubling of income
+per_doubling = slope * np.log10(2)
+
+# Bootstrap the slope so the claim carries an uncertainty range
+rng = np.random.default_rng(42)
+boots = []
+for _ in range(2000):
+    s = d07.sample(len(d07), replace=True, random_state=int(rng.integers(1e9)))
+    boots.append(np.polyfit(s["log_gdp"], s["lifeExp"], 1)[0] * np.log10(2))
+ci = np.percentile(boots, [2.5, 97.5])</code></pre></details>
+      </div>
+    </article>
+
+    <article class="study" id="auto">
+      <dl class="facts-col">
+        <div><dt>Kind</dt><dd>Python automation</dd></div>
+        <div><dt>Data</dt><dd><span class="sim">Simulated.</span> The 2025 supermarket sales file from the retail project, 13,165 rows.</dd></div>
+        <div><dt>Tools</dt><dd>Python, pandas, openpyxl</dd></div>
+        <div class="nums">
+          <div><b>1</b><span>command from raw CSV to finished report</span></div>
+          <div><b>65</b><span>problem rows found, fixed and logged</span></div>
+          <div><b>6</b><span>report sheets, with a chart and a cleaning log</span></div>
+        </div>
+      </dl>
+      <div>
+        <h3 class="disp">Sales report automation</h3>
+        <p class="lead">Cleaning a sales file and building the same summary tables and chart by hand takes an hour every time. This script does it with one command and leaves a log of every change, so the person reading the report can trust it.</p>
+        <div class="figs two">
+          <figure class="plate"><pre class="code" style="margin:0"><code>Read       13,165 rows from sample_input.csv
+Fixed          25  exact duplicate rows: removed
+Fixed          10  inconsistent branch names (spacing or capitals): standardised
+Fixed          20  missing unit counts: rebuilt from revenue and price (20), removed (0)
+Fixed          10  negative revenue values: sign corrected
+Clean      13,140 rows
+Wrote     Sales_Report.xlsx  (6 sheets, 1 chart) in 0.8s</code></pre>
+            <figcaption>Figure 6. The real output of one run on the sample file, started with <span class="mono">python auto_report.py sample_input.csv Sales_Report.xlsx</span>.</figcaption></figure>
+          <figure class="plate"><div class="tblwrap" style="margin-top:0"><table class="wrap"><thead><tr><th class="l">Check</th><th>Rows</th><th class="l">Action</th></tr></thead><tbody><tr><td class="l">Rows in the raw file</td><td>13,165</td><td class="l"></td></tr><tr><td class="l">Rows with an unreadable date</td><td>0</td><td class="l">None found</td></tr><tr><td class="l">Exact duplicate rows</td><td>25</td><td class="l">Removed</td></tr><tr><td class="l">Inconsistent branch names (spacing or capitals)</td><td>10</td><td class="l">Standardised</td></tr><tr><td class="l">Inconsistent category names (spacing or capitals)</td><td>0</td><td class="l">None found</td></tr><tr><td class="l">Missing unit counts</td><td>20</td><td class="l">Rebuilt from revenue and price (20), removed (0)</td></tr><tr><td class="l">Negative revenue values</td><td>10</td><td class="l">Sign corrected</td></tr><tr><td class="l">Rows in the clean data</td><td>13,140</td><td class="l"></td></tr></tbody></table></div>
+            <figcaption>Table 4. The Cleaning log sheet inside the finished workbook.</figcaption></figure>
+        </div>
+        <div class="figs">
+          <figure class="plate"><div class="tblwrap" style="margin-top:0"><table><thead><tr><th class="l">Measure</th><th>Value</th></tr></thead><tbody><tr><td class="l">Total revenue</td><td>₦2,362,697,571</td></tr><tr><td class="l">Units sold</td><td>685,763</td></tr><tr><td class="l">Average revenue per day</td><td>₦6,473,144</td></tr><tr><td class="l">Best month</td><td>Dec 2025 (267M)</td></tr><tr><td class="l">Weakest month</td><td>Feb 2025 (171M)</td></tr><tr><td class="l">Top branch</td><td>Victoria Island (20.0%)</td></tr><tr><td class="l">Lowest branch</td><td>Ajah (13.1%)</td></tr><tr><td class="l">Top category</td><td>Electronics (26.2%)</td></tr></tbody></table></div>
+            <figcaption>Table 5. The Summary sheet. Other sheets break revenue down by month (with an Excel chart), branch and category, and hold the full clean data with filters.</figcaption></figure>
+        </div>
+        <div class="body">
+          <h4>What it does</h4>
+          <p>The script reads the CSV and stops with a clear message if a column is missing. It removes duplicate rows, standardises branch and category names, rebuilds missing unit counts from revenue and price, and corrects negative revenue. Every fix is counted in the Cleaning log. It then writes one formatted Excel workbook: a summary, revenue by month with a native Excel chart, by branch and by category, the log, and the clean data with filters.</p>
+          <h4>How I checked it</h4>
+          <p>Total revenue in the report is ₦2,362,697,570.99 and units sold are 685,763. Both match, to the kobo, the separate analysis in the retail project, which was written independently. The monthly figures match too.</p>
+          <h4>Where it falls short</h4>
+          <p>It expects one file layout, so a different layout needs the column list at the top of the script changed. The report holds values, not live Excel formulas. The sample file is simulated.</p>
+        </div>
+        <details><summary>Show the core code</summary><pre class="code"><code>def clean(raw):
+    """Return the clean frame and a list of (issue, rows affected, what was done)."""
+    log = [("Rows in the raw file", len(raw), "")]
+    df = raw.copy()
+
+    n = int(df["date"].isna().sum())
+    df = df.dropna(subset=["date"])
+    log.append(("Rows with an unreadable date", n, "Removed" if n else "None found"))
+
+    n = int(df.duplicated().sum())
+    df = df.drop_duplicates()
+    log.append(("Exact duplicate rows", n, "Removed" if n else "None found"))
+
+    for col in ("branch", "category"):
+        tidy = df[col].astype(str).str.strip().str.title()
+        n = int((tidy != df[col]).sum())
+        df[col] = tidy
+        log.append((f"Inconsistent {col} names (spacing or capitals)", n, "Standardised" if n else "None found"))
+
+    n = int(df["units_sold"].isna().sum())
+    rebuild = df["units_sold"].isna() &amp; df["unit_price_ngn"].notna()
+    df.loc[rebuild, "units_sold"] = (
+        df.loc[rebuild, "revenue_ngn"].abs()
+        / (df.loc[rebuild, "unit_price_ngn"] * (1 - df.loc[rebuild, "discount"]))
+    ).round()
+    still = int(df["units_sold"].isna().sum())
+    df = df.dropna(subset=["units_sold"])
+    log.append(("Missing unit counts", n,
+                f"Rebuilt from revenue and price ({n - still}), removed ({still})" if n else "None found"))
+
+    n = int((df["revenue_ngn"] &lt; 0).sum())
+    df["revenue_ngn"] = df["revenue_ngn"].abs()
+    log.append(("Negative revenue values", n, "Sign corrected" if n else "None found"))
+
+    df["units_sold"] = df["units_sold"].astype(int)
+    log.append(("Rows in the clean data", len(df), ""))
+    return df.reset_index(drop=True), log</code></pre></details>
+      </div>
+    </article>
+
+    <article class="study" id="churn">
+      <dl class="facts-col">
+        <div><dt>Kind</dt><dd>Classification and decision cost</dd></div>
+        <div><dt>Data</dt><dd><span class="sim">Simulated.</span> 7,000 customers of a fictional provider. The cost figures are assumptions.</dd></div>
+        <div><dt>Tools</dt><dd>Python, pandas, scikit-learn</dd></div>
+        <div><dt>Code</dt><dd><a class="repo" href="https://github.com/Muhkamal/churn-prediction" target="_blank" rel="noopener">github.com/Muhkamal/churn-prediction</a></dd></div>
+        <div class="nums">
+          <div><b>0.75</b><span>test AUC</span></div>
+          <div><b>0.575</b><span>alert threshold chosen by cost</span></div>
+          <div><b>7.9%</b><span>cheaper than doing nothing</span></div>
+        </div>
+      </dl>
+      <div>
+        <h3 class="disp">Telecom churn prediction</h3>
+        <p class="lead">Predicting who will leave is the easy half. The harder half is deciding who to call. I built the model on 7,000 simulated customers, then chose the alert threshold by the naira cost of wrong calls instead of by accuracy.</p>
+        <div class="figs two">
+          <figure class="plate"><div id="fig-churn"></div>
+            <figcaption>Figure 4. Total cost on 1,400 unseen customers at each alert threshold. The threshold was picked on a separate validation set. The hollow marker is the default 0.5.</figcaption></figure>
+          <figure class="plate"><div class="tblwrap" style="margin-top:0"><table>
+            <thead><tr><th>Option</th><th>Cost</th></tr></thead>
+            <tbody>
+              <tr><td>Contact everyone</td><td>₦18.34M</td></tr>
+              <tr><td>Do nothing</td><td>₦16.56M</td></tr>
+              <tr><td>Default cutoff 0.5</td><td>₦15.60M</td></tr>
+              <tr class="best"><td>Chosen cutoff 0.575</td><td>₦15.25M</td></tr>
+            </tbody></table></div>
+            <div class="tblwrap"><table>
+              <thead><tr><th>Assumption</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>Lost per churner</td><td>₦45,000</td></tr>
+                <tr><td>Cost of one offer</td><td>₦6,000</td></tr>
+                <tr><td>Churners an offer keeps</td><td>40%</td></tr>
+              </tbody></table></div>
+            <figcaption>Table 3. Total cost on the test set, and the assumptions behind it.</figcaption></figure>
+        </div>
+        <div class="body">
+          <h4>What I found</h4>
+          <p>Logistic regression (AUC 0.75) beat gradient boosting (0.73). Raising the threshold from 0.5 to 0.575 cut the bill from ₦15.60M to ₦15.25M, which is 7.9% below doing nothing. At that setting the model caught 233 of 368 churners, missed 135 and sent 248 offers to people who would have stayed. Contract type is the strongest signal, with two-year customers far less likely to leave.</p>
+          <h4>Where it falls short</h4>
+          <p>The saving is modest and it rests on my assumptions. If an offer keeps fewer than about 28% of the churners it reaches, calling customers costs more than it saves. The data is simulated, so real customer data would need its own checks.</p>
+        </div>
+        <details><summary>Show the core code</summary><pre class="code"><code>def total_cost(y_true, prob, thr):
+    flag = prob &gt;= thr
+    churn = y_true.values == 1
+    cost = np.where(flag &amp; churn, OFFER + (1 - SAVE_RATE) * LOSS, 0.0)
+    cost += np.where(flag &amp; ~churn, OFFER, 0.0)
+    cost += np.where(~flag &amp; churn, LOSS, 0.0)
+    return float(cost.sum())
+
+val_costs = [total_cost(y_val, probs[best]["val"], t) for t in grid]
+thr = float(grid[int(np.argmin(val_costs))])   # chosen on validation only</code></pre></details>
+      </div>
+    </article>
+
+    <article class="study" id="app">
+      <dl class="facts-col">
+        <div><dt>Kind</dt><dd>Web and machine learning application</dd></div>
+        <div><dt>Data</dt><dd><span class="sim">Simulated.</span> Runs the churn model from the churn project. Nothing a visitor types leaves their browser.</dd></div>
+        <div><dt>Tools</dt><dd>Python, scikit-learn, JavaScript, HTML, CSS</dd></div>
+        <div class="nums">
+          <div><b>12</b><span>weights make up the whole model</span></div>
+          <div><b>25 of 25</b><span>test customers score the same as in scikit-learn</span></div>
+          <div><b>0</b><span>servers needed to run it</span></div>
+        </div>
+      </dl>
+      <div>
+        <h3 class="disp">Churn risk checker</h3>
+        <p class="lead">A model that stays in a notebook helps nobody. This is the churn model from the project above, packaged as a page a retention team could open: enter a customer's details, then see the risk score, whether it crosses the offer line, and which details push it up or down. Try it.</p>
+        <div class="figs">
+          <figure class="plate nobox"><div class="app" id="churnapp">
+  <form class="app-in" id="a-form" aria-label="Customer details">
+    <div class="presets">
+      <button type="button" data-preset="stay">Loyal customer</button>
+      <button type="button" data-preset="leave">New monthly customer</button>
+    </div>
+    <div class="fld">
+      <label for="a-tenure"><span>Months with the company</span><output id="a-tenure-o">14</output></label>
+      <input id="a-tenure" type="range" min="1" max="72" value="14">
+    </div>
+    <div class="fld">
+      <label for="a-contract"><span>Contract</span></label>
+      <select id="a-contract"><option value="Monthly" selected>Monthly</option><option value="One year">One year</option><option value="Two year">Two year</option></select>
+    </div>
+    <div class="fld">
+      <label for="a-plan"><span>Plan</span></label>
+      <select id="a-plan"><option value="Basic">Basic, ₦5,000 a month</option><option value="Standard" selected>Standard, ₦12,000 a month</option><option value="Premium">Premium, ₦24,000 a month</option></select>
+    </div>
+    <div class="fld">
+      <label for="a-payment"><span>How they pay</span></label>
+      <select id="a-payment"><option value="Auto-debit">Auto-debit</option><option value="Card">Card</option><option value="Transfer" selected>Bank transfer</option><option value="Cash">Cash</option></select>
+    </div>
+    <div class="two">
+      <div class="fld"><label for="a-calls"><span>Support calls</span></label><input id="a-calls" type="number" min="0" max="10" value="2" inputmode="numeric"></div>
+      <div class="fld"><label for="a-late"><span>Late payments</span></label><input id="a-late" type="number" min="0" max="6" value="1" inputmode="numeric"></div>
+    </div>
+    <label class="chk" for="a-bundle"><input id="a-bundle" type="checkbox"><span>Has a data or airtime bundle</span></label>
+  </form>
+
+  <div class="app-out" aria-live="polite">
+    <p class="cap">Risk score</p>
+    <div class="score"><b id="a-score">0</b><span>out of 100</span></div>
+    <div class="meter" id="a-meter" role="img" aria-label="Risk score meter">
+      <i id="a-fill"></i><u id="a-mark"><em id="a-marktxt">offer line</em></u>
+    </div>
+    <p class="verdict" id="a-verdict"></p>
+    <p class="cap">What moves the score, compared with an average customer</p>
+    <ul class="why" id="a-why"></ul>
+    <p class="fine">Runs in your browser with the logistic regression from the churn project, trained on simulated customers. The score ranks customers and is not a literal chance of leaving. The offer line comes from the naira-cost analysis, which rests on stated assumptions.</p>
+  </div>
+</div>
+
+            <figcaption>Figure 7. The live model. Change any detail, or start from one of the two example customers.</figcaption></figure>
+        </div>
+        <div class="body">
+          <h4>What it does</h4>
+          <p>I trained a logistic regression in Python, then exported it as a small file of numbers: one weight for each of its twelve inputs, the scaling values and the intercept. The page applies those numbers in JavaScript, so there is no server and no customer data is sent anywhere.</p>
+          <h4>How I checked it</h4>
+          <p>The project includes 25 test customers scored by scikit-learn. A test script runs the JavaScript scorer on the same customers and compares the results. The largest difference is under 0.000001, so the page gives the same answers as the Python model.</p>
+          <h4>Where it falls short</h4>
+          <p>The model is class-weighted, so its score ranks customers and is not a literal chance of leaving. The offer line comes from the cost analysis in the churn project, which assumes ₦45,000 lost per churner and ₦6,000 per offer. The data is simulated. A real deployment would need real data, monitoring and a way to update the model.</p>
+        </div>
+        <details><summary>Show the core code</summary><pre class="code"><code>function scoreCustomer(model, c) {
+  var z = model.intercept;
+  var parts = {};
+
+  model.features.forEach(function (feature, i) {
+    var kind = feature.slice(0, 1);
+    var name = feature.slice(3);
+    var x;
+    var group;
+
+    if (kind === "n") {
+      x = (c[name] - model.numeric_mean[name]) / model.numeric_scale[name];
+      group = name === "monthly_charge_ngn" ? "plan" : name;
+    } else {
+      var cut = name.indexOf("_");
+      var column = name.slice(0, cut);
+      x = c[column] === name.slice(cut + 1) ? 1 : 0;
+      group = column;
+    }
+
+    z += model.coef[i] * x;
+    parts[group] = (parts[group] || 0) + model.coef[i] * (x - model.feature_mean[i]);
+  });
+
+  var score = 1 / (1 + Math.exp(-z));
+  var factors = Object.keys(parts).map(function (k) { return { key: k, value: parts[k] }; });
+  return { score: score, flag: score &gt;= model.threshold, factors: factors };
+}</code></pre></details>
+      </div>
+    </article>
+
+    <article class="study" id="bc">
+      <dl class="facts-col">
+        <div><dt>Kind</dt><dd>Classification</dd></div>
+        <div><dt>Data</dt><dd>Public benchmark. Wisconsin Diagnostic Breast Cancer, 569 real cases, bundled with scikit-learn.</dd></div>
+        <div><dt>Tools</dt><dd>Python, scikit-learn</dd></div>
+        <div><dt>Code</dt><dd><a class="repo" href="https://github.com/Muhkamal/breast-cancer-classifier" target="_blank" rel="noopener">github.com/Muhkamal/breast-cancer-classifier</a></dd></div>
+        <div class="nums">
+          <div><b>0.996</b><span>test AUC</span></div>
+          <div><b>97.5%</b><span>precision</span></div>
+          <div><b>92.9%</b><span>recall</span></div>
+        </div>
+      </dl>
+      <div>
+        <h3 class="disp">Breast cancer classifier</h3>
+        <p class="lead">Can measurements taken from a cell sample tell a malignant tumour from a benign one? I compared three models on 569 real cases and kept 20% of the data aside until the very end.</p>
+        <div class="figs two">
+          <figure class="plate"><div id="fig-roc"></div>
+            <div class="legend" style="margin-top:8px;font:400 12px var(--mono);color:var(--muted)"><span><i class="sw a"></i>Logistic regression</span><span><i class="sw b"></i>Random forest</span><span><i class="sw c"></i>Gradient boosting</span></div>
+            <figcaption>Figure 1. ROC curves on the 114 held-out cases, zoomed into the top-left corner where the models differ. Closer to that corner is better.</figcaption></figure>
+          <figure class="plate"><div class="tblwrap" style="margin-top:0"><table>
+            <thead><tr><th>Model</th><th>CV AUC</th><th>Precision</th><th>Recall</th></tr></thead>
+            <tbody>
+              <tr class="best"><td>Logistic regression</td><td>0.996</td><td>97.5%</td><td>92.9%</td></tr>
+              <tr><td>Random forest</td><td>0.988</td><td>100%</td><td>92.9%</td></tr>
+              <tr><td>Gradient boosting</td><td>0.991</td><td>100%</td><td>90.5%</td></tr>
+            </tbody></table></div>
+            <figcaption>Table 1. Cross-validated AUC on the training data, then precision and recall on the test set at a 0.5 cutoff. The marked row was chosen using cross-validation only.</figcaption></figure>
+        </div>
+        <div class="body">
+          <h4>What I found</h4>
+          <p>A plain logistic regression on scaled features did as well as the two tree ensembles. I picked it using cross-validation on the training data, then scored it once on the test set. It flagged 39 of 42 malignant cases and raised one false alarm among 72 benign ones. The random forest leaned most on the worst perimeter, worst area and worst concave points of the cell nuclei.</p>
+          <h4>Where it falls short</h4>
+          <p>Three malignant cases were missed at the default cutoff. In a screening setting that is the number to push down, by lowering the cutoff and accepting more false alarms. The test set is small, so a single case moves recall by more than two points. This is a learning project on a benchmark dataset and not a diagnostic tool.</p>
+        </div>
+        <details><summary>Show the core code</summary><pre class="code"><code>cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=SEED)
+
+for name, model in models.items():
+    scores = cross_validate(
+        model, X_train, y_train, cv=cv, scoring=["roc_auc", "recall", "precision"]
+    )
+    model.fit(X_train, y_train)
+    prob = model.predict_proba(X_test)[:, 1]
+    pred = (prob &gt;= 0.5).astype(int)
+    tn, fp, fn, tp = confusion_matrix(y_test, pred).ravel()</code></pre></details>
+      </div>
+    </article>
+
+    <article class="study" id="diab">
+      <dl class="facts-col">
+        <div><dt>Kind</dt><dd>Regression</dd></div>
+        <div><dt>Data</dt><dd>Public benchmark. 442 patients from Efron et al., bundled with scikit-learn.</dd></div>
+        <div><dt>Tools</dt><dd>Python, NumPy, scikit-learn</dd></div>
+        <div><dt>Code</dt><dd><a class="repo" href="https://github.com/Muhkamal/diabetes-regression" target="_blank" rel="noopener">github.com/Muhkamal/diabetes-regression</a></dd></div>
+        <div class="nums">
+          <div><b>0.48</b><span>cross-validated R²</span></div>
+          <div><b>53.8</b><span>test RMSE, against 73.2 for the average</span></div>
+        </div>
+      </dl>
+      <div>
+        <h3 class="disp">Diabetes progression model</h3>
+        <p class="lead">Given ten baseline measurements for 442 patients (age, sex, BMI, blood pressure and six blood serum values), predict how far their disease has progressed a year later. I compared linear models and tree ensembles against a baseline that always guesses the average.</p>
+        <div class="figs two">
+          <figure class="plate"><div id="fig-diab"></div>
+            <figcaption>Figure 2. Ridge regression predictions against the true scores for the 89 test patients. Points on the dashed line would be perfect.</figcaption></figure>
+          <figure class="plate"><div class="tblwrap" style="margin-top:0"><table>
+            <thead><tr><th>Model</th><th>CV R²</th><th>Test R²</th><th>RMSE</th></tr></thead>
+            <tbody>
+              <tr><td>Mean baseline</td><td>-0.027</td><td>-0.012</td><td>73.2</td></tr>
+              <tr><td>Linear regression</td><td>0.480</td><td>0.453</td><td>53.9</td></tr>
+              <tr class="best"><td>Ridge</td><td>0.482</td><td>0.455</td><td>53.8</td></tr>
+              <tr><td>Lasso</td><td>0.480</td><td>0.471</td><td>52.9</td></tr>
+              <tr><td>Random forest</td><td>0.432</td><td>0.459</td><td>53.5</td></tr>
+              <tr><td>Gradient boosting</td><td>0.430</td><td>0.474</td><td>52.8</td></tr>
+            </tbody></table></div>
+            <figcaption>Table 2. R² from 5-fold cross-validation and on the test set, and test error in score units. Ridge was chosen by cross-validation.</figcaption></figure>
+        </div>
+        <div class="body">
+          <h4>What I found</h4>
+          <p>Every real model beat the guess-the-average baseline, cutting typical error by about 27%, and they all landed close together. Ridge, chosen by cross-validation, explains about 48% of the variation. The heavier models did not help, which tells me the limit is the information in ten measurements and not the choice of algorithm. BMI and blood pressure are the clearest drivers.</p>
+          <h4>Where it falls short</h4>
+          <p>About half of the variation is left unexplained, so this could rank patients by risk but could not predict an individual score reliably. Two blood serum measurements (s1 and s2) move together, so their large opposite coefficients should not be read one at a time.</p>
+        </div>
+        <details><summary>Show the core code</summary><pre class="code"><code>models = {
+    "Mean baseline": DummyRegressor(strategy="mean"),
+    "Ridge": RidgeCV(alphas=np.logspace(-3, 2, 30)),
+    "Lasso": LassoCV(cv=5, random_state=SEED, max_iter=20000),
+    "Gradient boosting": GradientBoostingRegressor(
+        n_estimators=150, learning_rate=0.05, max_depth=2, subsample=0.8, random_state=SEED
+    ),
+}
+
+for name, model in models.items():
+    cv_r2 = cross_val_score(model, X_train, y_train, cv=cv, scoring="r2")
+    model.fit(X_train, y_train)
+    p = model.predict(X_test)</code></pre></details>
+      </div>
+    </article>
+
+    <article class="study" id="wine">
+      <dl class="facts-col">
+        <div><dt>Kind</dt><dd>Unsupervised learning</dd></div>
+        <div><dt>Data</dt><dd>Public benchmark. UCI Wine, 178 wines and 13 chemical measurements, bundled with scikit-learn.</dd></div>
+        <div><dt>Tools</dt><dd>Python, scikit-learn (KMeans, PCA)</dd></div>
+        <div><dt>Code</dt><dd><a class="repo" href="https://github.com/Muhkamal/wine-clustering" target="_blank" rel="noopener">github.com/Muhkamal/wine-clustering</a></dd></div>
+        <div class="nums">
+          <div><b>0.90</b><span>adjusted Rand index against the real cultivars</span></div>
+          <div><b>3</b><span>clusters, best silhouette</span></div>
+        </div>
+      </dl>
+      <div>
+        <h3 class="disp">Wine clustering</h3>
+        <p class="lead">No labels, only chemistry. I scaled 13 chemical measurements for 178 Italian wines, asked KMeans to find groups, and only afterwards compared the groups with the three real grape cultivars.</p>
+        <div class="figs two">
+          <figure class="plate"><div id="fig-pca"></div>
+            <figcaption>Figure 3a. The wines flattened to two dimensions with PCA, which keeps 55% of the variation. Colour is the cluster found without labels.</figcaption></figure>
+          <figure class="plate"><div id="fig-sil"></div>
+            <figcaption>Figure 3b. Silhouette score for each number of clusters. Three scores highest.</figcaption></figure>
+        </div>
+        <div class="body">
+          <h4>What I found</h4>
+          <p>Three clusters scored best, and they match the real cultivars closely, with an adjusted Rand index of 0.90 where 1.0 is a perfect match. Flavanoids, the OD280/OD315 ratio, proline, total phenols and colour intensity separate the groups most.</p>
+          <h4>Where it falls short</h4>
+          <p>A silhouette of 0.29 means the groups touch rather than sit far apart, and a two-dimensional picture shows only 55% of the variation. The match to the cultivars is strong, not perfect.</p>
+        </div>
+        <details><summary>Show the core code</summary><pre class="code"><code>Z = StandardScaler().fit_transform(X)
+
+for k in range(2, 9):
+    km = KMeans(n_clusters=k, n_init=20, random_state=SEED).fit(Z)
+    scan.append({"k": k, "silhouette": silhouette_score(Z, km.labels_)})
+
+km = KMeans(n_clusters=3, n_init=20, random_state=SEED).fit(Z)
+print(adjusted_rand_score(truth, km.labels_))   # labels used only for checking</code></pre></details>
+      </div>
+    </article>
+  </section>
+
+  <section class="process" id="process">
+    <h2 class="sec-title disp">How I work</h2>
+    <ol class="steps">
+      <li><b>You send the task</b><span>Tell me what you need, share the file or data, and give the deadline. I reply in writing with what I will deliver and when.</span></li>
+      <li><b>We start with a trial</b><span>We begin with one small task. The price is agreed before I start, so there are no surprises on either side.</span></li>
+      <li><b>I check, then build</b><span>I look at the data first and tell you about any problems I find. Then I do the analysis, model or page. On longer tasks you get a progress update halfway.</span></li>
+      <li><b>You receive the work</b><span>A clean file or script you can open, the charts, and a short plain-language summary of what the numbers say.</span></li>
+      <li><b>One round of changes</b><span>Tell me what to adjust and I fix it. One round of corrections is included.</span></li>
+      <li><b>Payment and the next task</b><span>Payment is made as agreed. If the trial went well, we plan the next, bigger task together.</span></li>
+    </ol>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 class="disp">Send me one small task first.</h2>
+    <p>A messy spreadsheet, a dataset to summarise, a model to build or a report to chart. Tell me the task and the deadline, and judge my work on that before giving me anything bigger.</p>
+    <dl class="reach">
+      <div><dt>WhatsApp</dt><dd><a href="https://wa.me/2348059873849" target="_blank" rel="noopener">0805 987 3849</a></dd></div>
+      <div><dt>GitHub</dt><dd><a href="https://github.com/Muhkamal" target="_blank" rel="noopener">github.com/Muhkamal</a></dd></div>
+      <div><dt>Email</dt><dd><span class="val">muhammedkamaldeen4580@gmail.com</span> <button class="cp" type="button" data-copy="muhammedkamaldeen4580@gmail.com">Copy</button></dd></div>
+    </dl>
+    <p class="about">About the data. The breast cancer, diabetes and wine projects use public benchmark datasets that ship with scikit-learn, and the Nigeria analysis uses the public Gapminder dataset, which ends in 2007. The churn and retail projects use simulated data generated with a fixed seed, and the cost figures in the churn project are assumptions. The automation project runs on the simulated retail file, and the web app runs the simulated churn model. Nothing here is medical advice or real company data.</p>
+  </section>
+</div>
+
+<script>window.CHURN_MODEL = {"note":"Class-weighted logistic regression trained on simulated data. Scores are not literal probabilities.","intercept":0.17304341718750346,"features":["n__tenure_months","n__support_calls","n__late_payments","n__has_bundle","n__monthly_charge_ngn","c__contract_One year","c__contract_Two year","c__plan_Premium","c__plan_Standard","c__payment_Card","c__payment_Cash","c__payment_Transfer"],"coef":[-0.5673243576565358,0.22632270342451927,0.23976296955764517,-0.2420447547557709,0.39966425264694355,-1.0464411749898082,-1.84379849064237,-0.31907614713595844,-0.07306611352172672,0.2903887340711971,0.40277273042454287,0.3802019742930155],"feature_mean":[-1.8186510498621613e-17,1.9069402142013998e-16,1.5120180240133085e-16,1.2475206053371342e-15,-1.0145323734550836e-16,0.2683333333333333,0.15761904761904763,0.21357142857142858,0.33214285714285713,0.25214285714285717,0.15523809523809523,0.2945238095238095],"numeric_mean":{"tenure_months":21.20357142857143,"support_calls":1.3033333333333332,"late_payments":0.5033333333333333,"has_bundle":0.39285714285714285,"monthly_charge_ngn":11402.57142857143},"numeric_scale":{"tenure_months":19.101140245374605,"support_calls":1.1395021190700259,"late_payments":0.7201113229635523,"has_bundle":0.4883855118277623,"monthly_charge_ngn":7454.177994804745},"threshold":0.575};
+/* Score one customer with the exported churn model.
+ *
+ * The model is a logistic regression: one weight per feature plus an
+ * intercept, so it runs in plain JavaScript with no server. Numeric features
+ * are standardised first; categories are one-hot encoded with the first
+ * category dropped, exactly as in churn.py.
+ *
+ * Returns { score, flag, factors }.
+ *   score   number between 0 and 1 (class-weighted, not a literal probability)
+ *   flag    true when the score is at or above the cost-chosen threshold
+ *   factors how much each customer detail pushes the score up or down compared
+ *           with the average customer, in log-odds units
+ */
+function scoreCustomer(model, c) {
+  var z = model.intercept;
+  var parts = {};
+
+  model.features.forEach(function (feature, i) {
+    var kind = feature.slice(0, 1);
+    var name = feature.slice(3);
+    var x;
+    var group;
+
+    if (kind === "n") {
+      x = (c[name] - model.numeric_mean[name]) / model.numeric_scale[name];
+      group = name === "monthly_charge_ngn" ? "plan" : name;
+    } else {
+      var cut = name.indexOf("_");
+      var column = name.slice(0, cut);
+      x = c[column] === name.slice(cut + 1) ? 1 : 0;
+      group = column;
+    }
+
+    z += model.coef[i] * x;
+    parts[group] = (parts[group] || 0) + model.coef[i] * (x - model.feature_mean[i]);
+  });
+
+  var score = 1 / (1 + Math.exp(-z));
+  var factors = Object.keys(parts).map(function (k) { return { key: k, value: parts[k] }; });
+  return { score: score, flag: score >= model.threshold, factors: factors };
+}
+
+if (typeof module !== "undefined") module.exports = { scoreCustomer: scoreCustomer };
+
+(function () {
+  var M = window.CHURN_MODEL;
+  function $(id) { return document.getElementById(id); }
+  if (!M || !$("churnapp")) return;
+
+  var CHARGE = { Basic: 5000, Standard: 12000, Premium: 24000 };
+  var PRESETS = {
+    stay:  { tenure: 48, contract: "Two year", plan: "Premium", payment: "Auto-debit", calls: 0, late: 0, bundle: true },
+    leave: { tenure: 3, contract: "Monthly", plan: "Basic", payment: "Cash", calls: 4, late: 2, bundle: false }
+  };
+
+  function num(id, lo, hi) {
+    var v = parseInt($(id).value, 10);
+    if (isNaN(v)) v = lo;
+    return Math.max(lo, Math.min(hi, v));
+  }
+  function read() {
+    var plan = $("a-plan").value;
+    return {
+      tenure_months: num("a-tenure", 1, 72),
+      contract: $("a-contract").value,
+      plan: plan,
+      payment: $("a-payment").value,
+      support_calls: num("a-calls", 0, 10),
+      late_payments: num("a-late", 0, 6),
+      has_bundle: $("a-bundle").checked ? 1 : 0,
+      monthly_charge_ngn: CHARGE[plan]
+    };
+  }
+  function label(key, c) {
+    switch (key) {
+      case "tenure_months": return "Months with company: " + c.tenure_months;
+      case "contract": return "Contract: " + c.contract;
+      case "plan": return "Plan and price: " + c.plan;
+      case "payment": return "Payment: " + (c.payment === "Transfer" ? "Bank transfer" : c.payment);
+      case "support_calls": return "Support calls: " + c.support_calls;
+      case "late_payments": return "Late payments: " + c.late_payments;
+      default: return "Bundle: " + (c.has_bundle ? "Yes" : "No");
+    }
+  }
+
+  function render() {
+    var c = read();
+    $("a-tenure-o").textContent = c.tenure_months;
+    var r = scoreCustomer(M, c);
+    var pct = Math.round(r.score * 100), line = M.threshold * 100;
+
+    $("a-score").textContent = pct;
+    $("a-fill").style.width = pct + "%";
+    $("a-meter").className = "meter" + (r.flag ? " hot" : "");
+    $("a-meter").setAttribute("aria-label", "Risk score " + pct + " out of 100, offer line at " + line.toFixed(1));
+    $("a-mark").style.left = line + "%";
+    $("a-marktxt").textContent = "offer line " + line.toFixed(1);
+    $("a-verdict").innerHTML = r.flag
+      ? "<b>Above the offer line.</b> This customer would be sent a retention offer."
+      : "<b>Below the offer line.</b> No retention offer for this customer.";
+
+    var f = r.factors.slice().sort(function (a, b) { return Math.abs(b.value) - Math.abs(a.value); });
+    $("a-why").innerHTML = f.map(function (x) {
+      var w = Math.min(50, Math.abs(x.value) / 1.6 * 50).toFixed(1);
+      var dir = Math.abs(x.value) < 0.05 ? "none" : x.value > 0 ? "up" : "down";
+      var tag = dir === "up" ? "&#9650; raises" : dir === "down" ? "&#9660; lowers" : "no effect";
+      return '<li><div class="row"><span>' + label(x.key, c) + '</span><span class="tag">' + tag + '</span></div>' +
+             '<div class="bar ' + dir + '"><i style="width:' + (dir === "none" ? 0 : w) + '%"></i></div></li>';
+    }).join("");
+  }
+
+  $("a-form").addEventListener("submit", function (e) { e.preventDefault(); });
+  Array.prototype.forEach.call($("a-form").querySelectorAll("select, input"), function (el) {
+    el.addEventListener("input", render);
+    el.addEventListener("change", render);
+  });
+  Array.prototype.forEach.call($("a-form").querySelectorAll("[data-preset]"), function (b) {
+    b.addEventListener("click", function () {
+      var p = PRESETS[b.getAttribute("data-preset")];
+      $("a-tenure").value = p.tenure; $("a-contract").value = p.contract; $("a-plan").value = p.plan;
+      $("a-payment").value = p.payment; $("a-calls").value = p.calls; $("a-late").value = p.late;
+      $("a-bundle").checked = p.bundle;
+      render();
+    });
+  });
+  render();
+})();
+</script>
+<script>
+(function () {
+  var NAME = "Muhammed Kamaldeen";
+  if (NAME) document.getElementById("brand").textContent = NAME;
+
+  /* copy buttons: copy inside the click, fall back to selecting the text if the browser refuses */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"), function (b) {
+    function pick() {
+      var s = b.previousElementSibling; if (!s || !window.getSelection) return;
+      var r = document.createRange(); r.selectNodeContents(s);
+      var g = window.getSelection(); g.removeAllRanges(); g.addRange(r);
+      b.textContent = "Selected";
+    }
+    b.addEventListener("click", function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(b.getAttribute("data-copy")).then(function () {
+          b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1600);
+        }, pick);
+      } else { pick(); }
+    });
+  });
+
+  var D = {"nigeria":{"life":{"years":[1952,1957,1962,1967,1972,1977,1982,1987,1992,1997,2002,2007],"nigeria":[36.3,37.8,39.4,41.0,42.8,44.5,45.8,46.9,47.5,47.5,46.6,46.9],"africa_median":[38.8,40.6,42.6,44.7,47.0,49.3,50.8,51.6,52.4,52.8,51.2,52.9],"world_median":[45.1,48.4,50.9,53.8,56.5,59.7,62.4,65.8,67.7,69.4,70.8,71.9]},"scatter":[[974.6,43.8,0,"Afghanistan",0],[5937.0,76.4,0,"Albania",0],[6223.4,72.3,0,"Algeria",1],[4797.2,42.7,0,"Angola",1],[12779.4,75.3,0,"Argentina",0],[34435.4,81.2,0,"Australia",0],[36126.5,79.8,0,"Austria",0],[29796.0,75.6,0,"Bahrain",0],[1391.3,64.1,0,"Bangladesh",0],[33692.6,79.4,0,"Belgium",0],[1441.3,56.7,0,"Benin",1],[3822.1,65.6,0,"Bolivia",0],[7446.3,74.9,0,"Bosnia and Herzegovina",0],[12569.9,50.7,0,"Botswana",1],[9065.8,72.4,0,"Brazil",0],[10680.8,73.0,0,"Bulgaria",0],[1217.0,52.3,0,"Burkina Faso",1],[430.1,49.6,0,"Burundi",1],[1713.8,59.7,0,"Cambodia",0],[2042.1,50.4,0,"Cameroon",1],[36319.2,80.7,0,"Canada",0],[706.0,44.7,0,"Central African Republic",1],[1704.1,50.7,0,"Chad",1],[13171.6,78.6,0,"Chile",0],[4959.1,73.0,0,"China",0],[7006.6,72.9,0,"Colombia",0],[986.1,65.2,0,"Comoros",1],[277.6,46.5,0,"Congo, Dem. Rep.",1],[3632.6,55.3,0,"Congo, Rep.",1],[9645.1,78.8,0,"Costa Rica",0],[1544.8,48.3,0,"Cote d'Ivoire",1],[14619.2,75.7,0,"Croatia",0],[8948.1,78.3,0,"Cuba",0],[22833.3,76.5,0,"Czech Republic",0],[35278.4,78.3,0,"Denmark",0],[2082.5,54.8,0,"Djibouti",1],[6025.4,72.2,0,"Dominican Republic",0],[6873.3,75.0,0,"Ecuador",0],[5581.2,71.3,0,"Egypt",1],[5728.4,71.9,0,"El Salvador",0],[12154.1,51.6,0,"Equatorial Guinea",1],[641.4,58.0,0,"Eritrea",1],[690.8,52.9,0,"Ethiopia",1],[33207.1,79.3,0,"Finland",0],[30470.0,80.7,0,"France",0],[13206.5,56.7,0,"Gabon",1],[752.7,59.4,0,"Gambia",1],[32170.4,79.4,0,"Germany",0],[1327.6,60.0,0,"Ghana",1],[27538.4,79.5,0,"Greece",0],[5186.1,70.3,0,"Guatemala",0],[942.7,56.0,0,"Guinea",1],[579.2,46.4,0,"Guinea-Bissau",1],[1201.6,60.9,0,"Haiti",0],[3548.3,70.2,0,"Honduras",0],[39725.0,82.2,0,"Hong Kong, China",0],[18008.9,73.3,0,"Hungary",0],[36180.8,81.8,0,"Iceland",0],[2452.2,64.7,0,"India",0],[3540.7,70.7,0,"Indonesia",0],[11605.7,71.0,0,"Iran",0],[4471.1,59.5,0,"Iraq",0],[40676.0,78.9,0,"Ireland",0],[25523.3,80.7,0,"Israel",0],[28569.7,80.5,0,"Italy",0],[7320.9,72.6,0,"Jamaica",0],[31656.1,82.6,0,"Japan",0],[4519.5,72.5,0,"Jordan",0],[1463.2,54.1,0,"Kenya",1],[1593.1,67.3,0,"Korea, Dem. Rep.",0],[23348.1,78.6,0,"Korea, Rep.",0],[47307.0,77.6,0,"Kuwait",0],[10461.1,72.0,0,"Lebanon",0],[1569.3,42.6,0,"Lesotho",1],[414.5,45.7,0,"Liberia",1],[12057.5,74.0,0,"Libya",1],[1044.8,59.4,0,"Madagascar",1],[759.3,48.3,0,"Malawi",1],[12451.7,74.2,0,"Malaysia",0],[1042.6,54.5,0,"Mali",1],[1803.2,64.2,0,"Mauritania",1],[10957.0,72.8,0,"Mauritius",1],[11977.6,76.2,0,"Mexico",0],[3095.8,66.8,0,"Mongolia",0],[9253.9,74.5,0,"Montenegro",0],[3820.2,71.2,0,"Morocco",1],[823.7,42.1,0,"Mozambique",1],[944.0,62.1,0,"Myanmar",0],[4811.1,52.9,0,"Namibia",1],[1091.4,63.8,0,"Nepal",0],[36797.9,79.8,0,"Netherlands",0],[25185.0,80.2,0,"New Zealand",0],[2749.3,72.9,0,"Nicaragua",0],[619.7,56.9,0,"Niger",1],[2014.0,46.9,1,"Nigeria",1],[49357.2,80.2,0,"Norway",0],[22316.2,75.6,0,"Oman",0],[2605.9,65.5,0,"Pakistan",0],[9809.2,75.5,0,"Panama",0],[4172.8,71.8,0,"Paraguay",0],[7408.9,71.4,0,"Peru",0],[3190.5,71.7,0,"Philippines",0],[15389.9,75.6,0,"Poland",0],[20509.6,78.1,0,"Portugal",0],[19328.7,78.7,0,"Puerto Rico",0],[7670.1,76.4,0,"Reunion",1],[10808.5,72.5,0,"Romania",0],[863.1,46.2,0,"Rwanda",1],[1598.4,65.5,0,"Sao Tome and Principe",1],[21654.8,72.8,0,"Saudi Arabia",0],[1712.5,63.1,0,"Senegal",1],[9786.5,74.0,0,"Serbia",0],[862.5,42.6,0,"Sierra Leone",1],[47143.2,80.0,0,"Singapore",0],[18678.3,74.7,0,"Slovak Republic",0],[25768.3,77.9,0,"Slovenia",0],[926.1,48.2,0,"Somalia",1],[9269.7,49.3,0,"South Africa",1],[28821.1,80.9,0,"Spain",0],[3970.1,72.4,0,"Sri Lanka",0],[2602.4,58.6,0,"Sudan",1],[4513.5,39.6,0,"Swaziland",1],[33859.7,80.9,0,"Sweden",0],[37506.4,81.7,0,"Switzerland",0],[4184.5,74.1,0,"Syria",0],[28718.3,78.4,0,"Taiwan",0],[1107.5,52.5,0,"Tanzania",1],[7458.4,70.6,0,"Thailand",0],[883.0,58.4,0,"Togo",1],[18008.5,69.8,0,"Trinidad and Tobago",0],[7092.9,73.9,0,"Tunisia",1],[8458.3,71.8,0,"Turkey",0],[1056.4,51.5,0,"Uganda",1],[33203.3,79.4,0,"United Kingdom",0],[42951.7,78.2,0,"United States",0],[10611.5,76.4,0,"Uruguay",0],[11415.8,73.7,0,"Venezuela",0],[2441.6,74.2,0,"Vietnam",0],[3025.3,73.4,0,"West Bank and Gaza",0],[2280.8,62.7,0,"Yemen, Rep.",0],[1271.2,42.4,0,"Zambia",1],[469.7,43.5,0,"Zimbabwe",1]],"fit":{"slope":16.585,"intercept":4.95},"fit_line":{"x_min":277.6,"x_max":49357.2},"predicted":59.7},"bc":{"roc":{"Logistic regression":[[0.0,0.0],[0.0,0.0238],[0.0,0.9286],[0.0139,0.9286],[0.0139,0.9762],[0.1389,0.9762],[0.1389,1.0],[1.0,1.0]],"Random forest":[[0.0,0.0],[0.0,0.3333],[0.0,0.4286],[0.0,0.4524],[0.0,0.5476],[0.0,0.5714],[0.0,0.619],[0.0,0.9286],[0.0278,0.9286],[0.0278,0.9524],[0.0972,0.9524],[0.0972,0.9762],[0.1111,0.9762],[0.1111,1.0],[0.125,1.0],[0.1528,1.0],[0.1667,1.0],[0.2222,1.0],[0.2917,1.0],[0.3194,1.0],[0.3472,1.0],[0.3889,1.0],[0.5278,1.0],[0.6111,1.0],[0.7639,1.0],[1.0,1.0]],"Gradient boosting":[[0.0,0.0],[0.0,0.0238],[0.0,0.0714],[0.0,0.1429],[0.0,0.9048],[0.0278,0.9048],[0.0278,0.9762],[0.1389,0.9762],[0.1389,1.0],[0.4167,1.0],[0.4583,1.0],[0.4722,1.0],[0.5,1.0],[0.8056,1.0],[0.8472,1.0],[0.9028,1.0],[0.9167,1.0],[0.9722,1.0],[1.0,1.0]]}},"diab":{"scatter":[[219.0,140.0],[70.0,180.1],[202.0,136.2],[230.0,292.3],[111.0,123.0],[84.0,92.8],[242.0,257.7],[272.0,183.5],[94.0,88.1],[96.0,109.6],[94.0,94.5],[252.0,166.3],[99.0,57.2],[297.0,206.2],[135.0,99.8],[67.0,131.3],[295.0,220.3],[264.0,249.3],[170.0,196.2],[275.0,217.1],[310.0,207.2],[64.0,88.7],[128.0,71.2],[232.0,188.7],[129.0,155.4],[118.0,160.4],[263.0,188.8],[77.0,179.2],[48.0,48.8],[107.0,109.6],[140.0,176.8],[113.0,88.3],[90.0,132.5],[164.0,183.2],[180.0,173.6],[233.0,190.6],[42.0,123.8],[84.0,119.1],[172.0,147.1],[63.0,59.8],[48.0,72.8],[108.0,107.8],[156.0,164.2],[168.0,153.1],[90.0,172.5],[52.0,63.0],[200.0,74.2],[87.0,112.2],[90.0,54.1],[258.0,165.3],[136.0,154.1],[158.0,63.9],[69.0,107.3],[72.0,108.9],[171.0,173.7],[95.0,156.5],[72.0,94.5],[151.0,209.6],[168.0,119.5],[60.0,74.6],[122.0,186.8],[52.0,205.0],[187.0,141.0],[102.0,105.6],[214.0,129.1],[248.0,202.6],[181.0,169.7],[110.0,163.8],[140.0,122.6],[202.0,143.4],[101.0,181.4],[222.0,197.8],[281.0,234.6],[61.0,144.8],[89.0,80.9],[91.0,155.1],[186.0,192.9],[220.0,207.8],[237.0,158.3],[233.0,203.6],[68.0,109.9],[190.0,139.7],[96.0,54.6],[72.0,56.1],[153.0,113.8],[98.0,81.2],[37.0,81.3],[63.0,57.1],[184.0,165.4]]},"wine":{"points":[[3.317,1.443,2,0,14.23],[2.209,-0.333,2,0,13.2],[2.517,1.031,2,0,13.16],[3.757,2.756,2,0,14.37],[1.009,0.87,2,0,13.24],[3.05,2.122,2,0,14.2],[2.449,1.175,2,0,14.39],[2.059,1.609,2,0,14.06],[2.511,0.918,2,0,14.83],[2.754,0.789,2,0,13.86],[3.48,1.302,2,0,14.1],[1.755,0.612,2,0,14.12],[2.113,0.676,2,0,13.75],[3.458,1.131,2,0,14.75],[4.313,2.096,2,0,14.38],[2.305,1.663,2,0,13.63],[2.172,2.327,2,0,14.3],[1.899,1.631,2,0,13.83],[3.542,2.518,2,0,14.19],[2.085,1.061,2,0,13.64],[3.124,0.787,2,0,14.06],[1.087,0.242,2,0,12.93],[2.535,-0.092,2,0,13.71],[1.645,-0.516,2,0,12.85],[1.762,-0.317,2,0,13.5],[0.99,0.941,2,0,13.05],[1.775,0.686,2,0,13.39],[1.235,-0.09,2,0,13.3],[2.188,0.69,2,0,13.87],[2.256,0.191,2,0,14.02],[2.5,1.241,2,0,13.73],[2.677,1.472,2,0,13.58],[1.629,0.053,2,0,13.68],[1.903,1.633,2,0,13.76],[1.41,0.698,2,0,13.51],[1.904,0.177,2,0,13.48],[1.385,0.659,2,0,13.28],[1.122,0.114,2,0,13.05],[1.502,-0.769,2,0,13.07],[2.53,1.803,2,0,14.22],[2.588,0.78,2,0,13.56],[0.668,0.17,2,0,13.41],[3.071,1.156,2,0,13.88],[0.462,0.331,2,0,13.24],[2.101,-0.071,2,0,13.05],[1.136,1.777,2,0,14.21],[2.727,1.191,2,0,14.38],[2.821,0.646,2,0,13.9],[2.01,1.247,2,0,14.1],[2.707,1.752,2,0,13.94],[3.215,0.167,2,0,13.05],[2.859,0.745,2,0,13.83],[3.506,1.613,2,0,13.82],[2.225,1.875,2,0,13.77],[2.147,1.017,2,0,13.74],[2.469,1.329,2,0,13.56],[2.742,1.437,2,0,14.22],[2.174,1.212,2,0,13.29],[3.139,1.732,2,0,13.72],[-0.929,-3.073,0,1,12.37],[-1.542,-1.381,0,1,12.33],[-1.836,-0.83,1,1,12.64],[0.031,-1.263,0,1,13.67],[2.05,-1.925,0,1,12.37],[-0.61,-1.908,0,1,12.17],[0.9,-0.764,0,1,12.37],[2.249,-1.885,0,1,13.11],[0.183,-2.427,0,1,12.37],[-0.813,-0.221,0,1,13.34],[1.976,-1.403,0,1,12.21],[-1.572,-0.885,0,1,12.29],[1.658,-0.957,0,1,13.86],[-0.725,-1.064,0,1,13.49],[2.562,0.26,2,1,12.99],[1.833,-1.288,0,1,11.96],[-0.868,-2.444,0,1,11.66],[0.37,-2.154,0,1,13.03],[-1.457,-1.383,0,1,11.84],[1.263,-0.771,0,1,12.33],[0.376,-1.027,0,1,12.7],[0.762,-3.375,0,1,12.0],[1.035,-1.451,0,1,12.72],[-0.495,-2.381,0,1,12.08],[-2.539,-0.087,1,1,13.05],[0.835,-1.474,0,1,11.84],[0.788,-2.027,0,1,12.67],[-0.807,-2.234,0,1,12.16],[-0.558,-2.373,0,1,11.65],[-1.115,-1.802,0,1,11.64],[-0.556,-2.658,0,1,12.08],[-1.349,-2.118,0,1,12.08],[-1.564,-1.852,0,1,12.0],[-1.933,-1.559,0,1,12.69],[0.747,-2.313,0,1,12.29],[0.957,-2.224,0,1,11.62],[2.544,0.169,2,1,12.47],[-0.544,-0.369,0,1,11.81],[1.031,-2.566,0,1,12.29],[2.252,-1.433,0,1,12.37],[1.41,-2.166,0,1,12.29],[0.798,-2.377,0,1,12.08],[-0.55,-2.293,0,1,12.6],[-0.161,-1.164,0,1,12.34],[-0.66,-2.68,0,1,11.82],[0.392,-2.099,0,1,12.51],[-1.772,-1.717,0,1,12.42],[-0.366,-2.169,0,1,12.25],[-1.621,-1.356,0,1,12.72],[0.083,-2.306,0,1,12.22],[1.578,-1.462,0,1,11.61],[1.421,-1.418,0,1,11.46],[-0.279,-1.931,0,1,12.52],[-1.303,-0.763,0,1,11.76],[-0.457,-2.269,0,1,11.41],[-0.494,-1.939,0,1,12.08],[0.482,-3.872,0,1,11.03],[-0.253,-2.821,0,1,11.82],[-0.107,-1.929,0,1,12.42],[-2.433,-1.257,1,1,12.77],[-0.551,-2.222,0,1,12.0],[0.74,-1.409,0,1,11.45],[1.336,0.253,2,1,11.56],[-1.177,-0.664,0,1,12.42],[-0.462,-0.618,0,1,13.05],[0.978,-1.446,0,1,11.87],[-0.097,-2.11,0,1,12.07],[0.038,-1.267,0,1,12.43],[-1.597,-1.208,0,1,11.79],[-0.48,-1.939,0,1,12.37],[-1.793,-1.15,0,1,12.04],[-1.327,0.17,1,2,12.86],[-2.385,0.375,1,2,12.88],[-2.937,0.264,1,2,12.81],[-2.147,0.368,1,2,12.7],[-2.37,-0.46,1,2,12.51],[-3.064,0.353,1,2,12.6],[-3.916,0.155,1,2,12.25],[-3.936,0.66,1,2,12.53],[-3.094,0.349,1,2,13.49],[-2.374,0.292,1,2,12.84],[-2.779,0.287,1,2,12.93],[-2.287,0.373,1,2,13.36],[-2.986,0.489,1,2,13.52],[-2.375,0.482,1,2,13.62],[-2.21,1.16,1,2,12.25],[-2.626,0.563,1,2,13.16],[-4.281,0.65,1,2,13.88],[-3.583,1.273,1,2,12.87],[-2.807,1.571,1,2,13.32],[-2.9,2.041,1,2,13.08],[-2.321,2.356,1,2,13.5],[-2.55,2.045,1,2,12.79],[-1.813,1.528,1,2,13.11],[-2.76,2.139,1,2,13.23],[-2.737,0.41,1,2,12.58],[-3.605,1.802,1,2,13.17],[-2.89,1.925,1,2,13.84],[-3.392,1.312,1,2,12.45],[-1.048,3.515,1,2,14.34],[-1.61,2.407,1,2,13.48],[-3.143,0.738,1,2,12.36],[-2.24,1.175,1,2,13.69],[-2.848,0.556,1,2,12.85],[-2.597,0.698,1,2,12.96],[-2.949,1.555,1,2,13.78],[-3.53,0.883,1,2,13.73],[-2.406,2.592,1,2,13.45],[-2.929,1.274,1,2,12.82],[-2.181,2.078,1,2,13.58],[-2.381,2.589,1,2,13.4],[-3.212,-0.251,1,2,12.2],[-3.678,0.848,1,2,12.77],[-2.466,2.194,1,2,14.16],[-3.371,2.216,1,2,13.71],[-2.602,1.757,1,2,13.4],[-2.678,2.761,1,2,13.27],[-2.387,2.297,1,2,13.17],[-3.209,2.769,1,2,14.13]],"k_scan":[{"k":2,"inertia":1658.8,"silhouette":0.259},{"k":3,"inertia":1277.9,"silhouette":0.285},{"k":4,"inertia":1175.4,"silhouette":0.259},{"k":5,"inertia":1107.0,"silhouette":0.232},{"k":6,"inertia":1046.0,"silhouette":0.237},{"k":7,"inertia":981.6,"silhouette":0.204},{"k":8,"inertia":935.2,"silhouette":0.157}],"chosen_k":3,"pca_variance_explained":[0.362,0.192]},"churn":{"cost_curve":[[0.05,18.306],[0.075,18.18],[0.1,18.036],[0.125,17.898],[0.15,17.736],[0.175,17.52],[0.2,17.346],[0.225,17.124],[0.25,16.86],[0.275,16.59],[0.3,16.506],[0.325,16.356],[0.35,16.296],[0.375,16.08],[0.4,15.96],[0.425,15.81],[0.45,15.756],[0.475,15.69],[0.5,15.6],[0.525,15.474],[0.55,15.372],[0.575,15.252],[0.6,15.294],[0.625,15.282],[0.65,15.42],[0.675,15.624],[0.7,15.708],[0.725,15.876],[0.75,16.08],[0.775,16.212],[0.8,16.302],[0.825,16.416],[0.85,16.452],[0.875,16.536],[0.9,16.554],[0.925,16.548],[0.95,16.56]],"chosen_threshold":0.575,"test_cost_ngn_m":{"do_nothing":16.56,"contact_everyone":18.34,"default_threshold_0.5":15.6,"chosen_threshold":15.25}},"retail":{"months":[["Jan",191.8],["Feb",171.1],["Mar",193.5],["Apr",214.0],["May",194.0],["Jun",171.4],["Jul",176.8],["Aug",220.7],["Sep",183.7],["Oct",191.0],["Nov",187.3],["Dec",267.2]]}};
+  function $(id) { return document.getElementById(id); }
+  /* figures are drawn at the real pixel width of their plate so text stays readable on phones */
+  function fw(id) { var w = Math.round($(id).getBoundingClientRect().width); return Math.max(260, w || 520); }
+  function fh(w) { return Math.round(Math.max(250, Math.min(360, w * 0.64))); }
+
+  /* ---------- svg helpers ---------- */
+  function frame(W, H, L, R, T, B) { return { W: W, H: H, L: L, R: R, T: T, B: B, iw: W - L - R, ih: H - T - B }; }
+  function X(f, d, v) { return f.L + f.iw * (v - d[0]) / (d[1] - d[0]); }
+  function Y(f, d, v) { return f.T + f.ih * (1 - (v - d[0]) / (d[1] - d[0])); }
+  function ticks(d, step) {
+    var a = [], v = Math.ceil(d[0] / step - 1e-9) * step;
+    for (; v <= d[1] + 1e-9; v += step) a.push(Math.round(v * 1e6) / 1e6);
+    return a;
+  }
+  function open(f, label) { return '<svg class="fig" viewBox="0 0 ' + f.W + ' ' + f.H + '" role="img" aria-label="' + label + '">'; }
+  function axes(f, xd, yd, xt, yt, xf, yf, xtitle, ytitle) {
+    var s = "";
+    yt.forEach(function (t) {
+      s += '<line class="gl" x1="' + f.L + '" x2="' + (f.W - f.R) + '" y1="' + Y(f, yd, t) + '" y2="' + Y(f, yd, t) + '"/>';
+      s += '<text x="' + (f.L - 8) + '" y="' + (Y(f, yd, t) + 4) + '" text-anchor="end">' + yf(t) + '</text>';
+    });
+    s += '<line class="base" x1="' + f.L + '" x2="' + (f.W - f.R) + '" y1="' + (f.H - f.B) + '" y2="' + (f.H - f.B) + '"/>';
+    xt.forEach(function (t) {
+      s += '<text x="' + X(f, xd, t) + '" y="' + (f.H - f.B + 17) + '" text-anchor="middle">' + xf(t) + '</text>';
+    });
+    if (xtitle) s += '<text class="tt" x="' + (f.L + f.iw / 2) + '" y="' + (f.H - 6) + '" text-anchor="middle">' + xtitle + '</text>';
+    if (ytitle) s += '<text class="tt" transform="rotate(-90)" x="' + (-(f.T + f.ih / 2)) + '" y="13" text-anchor="middle">' + ytitle + '</text>';
+    return s;
+  }
+  function path(f, xd, yd, pts) {
+    return pts.map(function (p, i) { return (i ? "L" : "M") + X(f, xd, p[0]).toFixed(1) + " " + Y(f, yd, p[1]).toFixed(1); }).join("");
+  }
+
+  function renderFigs() {
+  /* ---------- Figure 1: zoomed ROC ---------- */
+  (function () {
+    var w = fw("fig-roc"), f = frame(w, fh(w), 50, 14, 14, 50), xd = [0, 0.2], yd = [0.7, 1.0];
+    var s = open(f, "Zoomed ROC curves for three classifiers, all close to the top-left corner");
+    s += '<defs><clipPath id="cp-roc"><rect x="' + f.L + '" y="' + f.T + '" width="' + f.iw + '" height="' + f.ih + '"/></clipPath></defs>';
+    s += axes(f, xd, yd, [0, 0.05, 0.1, 0.15, 0.2], [0.7, 0.8, 0.9, 1.0],
+      function (v) { return v.toFixed(2); }, function (v) { return v.toFixed(1); }, "False positive rate", "True positive rate");
+    var map = { "Logistic regression": "c-blue", "Random forest": "c-orange", "Gradient boosting": "c-green" };
+    Object.keys(map).forEach(function (k) {
+      s += '<path class="ln ' + map[k] + '" clip-path="url(#cp-roc)" d="' + path(f, xd, yd, D.bc.roc[k]) + '"/>';
+    });
+    $("fig-roc").innerHTML = s + "</svg>";
+  })();
+
+  /* ---------- Figure 2: predicted vs actual ---------- */
+  (function () {
+    var w = fw("fig-diab"), f = frame(w, fh(w), 50, 14, 14, 50), d = [0, 350];
+    var s = open(f, "Scatter of predicted against actual diabetes progression for the test patients");
+    var t = [0, 100, 200, 300];
+    s += axes(f, d, d, t, t, String, String, "Actual progression score", "Predicted score");
+    s += '<line x1="' + X(f, d, 0) + '" y1="' + Y(f, d, 0) + '" x2="' + X(f, d, 350) + '" y2="' + Y(f, d, 350) + '" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="5 4"/>';
+    D.diab.scatter.forEach(function (p) {
+      s += '<circle class="f-blue" cx="' + X(f, d, p[0]).toFixed(1) + '" cy="' + Y(f, d, p[1]).toFixed(1) + '" r="3.6" fill-opacity="0.72"/>';
+    });
+    $("fig-diab").innerHTML = s + "</svg>";
+  })();
+
+  /* ---------- Figure 3a: PCA scatter, 3b: silhouette ---------- */
+  var cls = ["f-blue", "f-orange", "f-green"];
+  (function () {
+    var pts = D.wine.points, xs = pts.map(function (p) { return p[0]; }), ys = pts.map(function (p) { return p[1]; });
+    var xd = [Math.floor(Math.min.apply(null, xs)) - 0.5, Math.ceil(Math.max.apply(null, xs)) + 0.5];
+    var yd = [Math.floor(Math.min.apply(null, ys)) - 0.5, Math.ceil(Math.max.apply(null, ys)) + 0.5];
+    var w = fw("fig-pca"), f = frame(w, fh(w), 50, 14, 14, 50), ve = D.wine.pca_variance_explained;
+    var s = open(f, "PCA scatter of 178 wines coloured by three clusters");
+    s += axes(f, xd, yd, ticks(xd, 2), ticks(yd, 2), String, String,
+      "Component 1 (" + Math.round(ve[0] * 100) + "% of variation)", "Component 2 (" + Math.round(ve[1] * 100) + "%)");
+    pts.forEach(function (p) {
+      s += '<circle class="' + cls[p[2]] + '" cx="' + X(f, xd, p[0]).toFixed(1) + '" cy="' + Y(f, yd, p[1]).toFixed(1) + '" r="4" fill-opacity="0.82"/>';
+    });
+    $("fig-pca").innerHTML = s + "</svg>";
+  })();
+  (function () {
+    var w = fw("fig-sil"), f = frame(w, fh(w), 50, 14, 14, 50), sc = D.wine.k_scan, yd = [0, 0.35];
+    var s = open(f, "Silhouette score for two to eight clusters, highest at three");
+    s += axes(f, [0, 1], yd, [], [0, 0.1, 0.2, 0.3], String, function (v) { return v.toFixed(1); }, "Number of clusters", "Silhouette score");
+    var step = f.iw / sc.length, bw = Math.min(34, step * 0.6);
+    sc.forEach(function (r, i) {
+      var cx = f.L + step * i + step / 2, hot = r.k === D.wine.chosen_k;
+      s += '<rect class="' + (hot ? "f-orange" : "f-blue") + '" x="' + (cx - bw / 2) + '" y="' + Y(f, yd, r.silhouette) + '" width="' + bw + '" height="' + (Y(f, yd, 0) - Y(f, yd, r.silhouette)) + '"/>';
+      s += '<text x="' + cx + '" y="' + (Y(f, yd, r.silhouette) - 6) + '" text-anchor="middle"' + (hot ? ' class="ink"' : "") + '>' + r.silhouette.toFixed(2) + '</text>';
+      s += '<text x="' + cx + '" y="' + (f.H - f.B + 17) + '" text-anchor="middle">' + r.k + '</text>';
+    });
+    $("fig-sil").innerHTML = s + "</svg>";
+  })();
+
+  /* ---------- Figure 4: cost against threshold ---------- */
+  (function () {
+    var w = fw("fig-churn"), c = D.churn, curve = c.cost_curve, f = frame(w, fh(w), 54, 14, 14, 50);
+    var vals = curve.map(function (p) { return p[1]; });
+    var yd = [Math.floor(Math.min.apply(null, vals) - 0.6), Math.ceil(Math.max(Math.max.apply(null, vals), c.test_cost_ngn_m.do_nothing) + 0.2)];
+    var xd = [0.05, 0.95];
+    var s = open(f, "Total cost against alert threshold, lowest at 0.575");
+    s += axes(f, xd, yd, [0.1, 0.3, 0.5, 0.7, 0.9], ticks(yd, 1),
+      function (v) { return v.toFixed(1); }, function (v) { return "₦" + v + "M"; }, "Alert threshold", "Total cost");
+    var dn = c.test_cost_ngn_m.do_nothing;
+    s += '<line x1="' + f.L + '" x2="' + (f.W - f.R) + '" y1="' + Y(f, yd, dn) + '" y2="' + Y(f, yd, dn) + '" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="5 4"/>';
+    s += '<text x="' + (f.L + 6) + '" y="' + (Y(f, yd, dn) + 16) + '">Do nothing ₦' + dn.toFixed(2) + 'M</text>';
+    s += '<path class="ln c-blue" d="' + path(f, xd, yd, curve) + '"/>';
+    var def = c.test_cost_ngn_m["default_threshold_0.5"], best = c.test_cost_ngn_m.chosen_threshold;
+    s += '<circle cx="' + X(f, xd, 0.5) + '" cy="' + Y(f, yd, def) + '" r="5" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.6"/>';
+    s += '<circle class="f-orange" cx="' + X(f, xd, c.chosen_threshold) + '" cy="' + Y(f, yd, best) + '" r="5.5"/>';
+    s += '<text class="ink" x="' + X(f, xd, c.chosen_threshold) + '" y="' + (Y(f, yd, best) + 24) + '" text-anchor="middle">Chosen ' + c.chosen_threshold + ', ₦' + best.toFixed(2) + 'M</text>';
+    $("fig-churn").innerHTML = s + "</svg>";
+  })();
+
+  /* ---------- Figure 5: retail months ---------- */
+  (function () {
+    var w = fw("fig-retail"), m = D.retail.months, f = frame(w, fh(w), 56, 10, 22, 50), yd = [0, 300];
+    var s = open(f, "Bar chart of monthly revenue in naira millions, peaking at 267 in December");
+    s += axes(f, [0, 1], yd, [], [0, 100, 200, 300], String, function (v) { return v ? "₦" + v + "M" : "₦0"; }, "", "Revenue");
+    var step = f.iw / m.length, bw = Math.min(26, step * 0.62), tight = step < 30;
+    m.forEach(function (r, i) {
+      var cx = f.L + step * i + step / 2, hot = r[0] === "Dec";
+      s += '<rect class="' + (hot ? "f-orange" : "f-blue") + '" x="' + (cx - bw / 2) + '" y="' + Y(f, yd, r[1]) + '" width="' + bw + '" height="' + (Y(f, yd, 0) - Y(f, yd, r[1])) + '"/>';
+      if (!tight || hot) s += '<text x="' + cx + '" y="' + (Y(f, yd, r[1]) - 6) + '" text-anchor="' + (hot && tight ? "end" : "middle") + '"' + (hot ? ' class="ink"' : "") + '>' + Math.round(r[1]) + '</text>';
+      if (!tight || i % 2 === 0 || hot) s += '<text x="' + cx + '" y="' + (f.H - f.B + 17) + '" text-anchor="middle">' + (tight ? r[0].charAt(0) : r[0]) + '</text>';
+    });
+    $("fig-retail").innerHTML = s + "</svg>";
+  })();
+
+  /* ---------- Figure 8: life expectancy over time ---------- */
+  (function () {
+    var L = D.nigeria.life, w = fw("fig-life"), f = frame(w, fh(w), 46, 16, 16, 44), xd = [1952, 2007], yd = [30, 80];
+    var s = open(f, "Life expectancy from 1952 to 2007 for Nigeria, the African median and the world median");
+    s += axes(f, xd, yd, [1960, 1970, 1980, 1990, 2000], [30, 40, 50, 60, 70, 80], String, String, "Year", "Years");
+    [["world_median", "var(--muted)"], ["africa_median", "var(--blue)"], ["nigeria", "var(--orange)"]].forEach(function (k) {
+      var pts = L.years.map(function (y, i) { return [y, L[k[0]][i]]; });
+      s += '<path d="' + path(f, xd, yd, pts) + '" fill="none" stroke="' + k[1] + '" stroke-width="' + (k[0] === "nigeria" ? 3 : 2) + '" stroke-linejoin="round" stroke-linecap="round"/>';
+    });
+    var xe = X(f, xd, 2007), n = L.nigeria.length - 1;
+    s += '<text class="ink" x="' + (xe - 4) + '" y="' + (Y(f, yd, L.nigeria[n]) + 18) + '" text-anchor="end">Nigeria ' + L.nigeria[n].toFixed(1) + '</text>';
+    s += '<text x="' + (xe - 4) + '" y="' + (Y(f, yd, L.africa_median[n]) - 8) + '" text-anchor="end">Africa ' + L.africa_median[n].toFixed(1) + '</text>';
+    s += '<text x="' + (xe - 4) + '" y="' + (Y(f, yd, L.world_median[n]) - 8) + '" text-anchor="end">World ' + L.world_median[n].toFixed(1) + '</text>';
+    $("fig-life").innerHTML = s + "</svg>";
+  })();
+
+  /* ---------- Figure 9: income against life expectancy, log scale ---------- */
+  (function () {
+    var N = D.nigeria, w = fw("fig-income"), f = frame(w, fh(w), 46, 14, 14, 50), yd = [35, 85];
+    var lo = Math.log10(250), hi = Math.log10(60000);
+    function XL(v) { return f.L + f.iw * (Math.log10(v) - lo) / (hi - lo); }
+    var s = open(f, "Scatter of income per person against life expectancy for 142 countries in 2007, with Nigeria far below the trend line");
+    [40, 50, 60, 70, 80].forEach(function (t) {
+      s += '<line class="gl" x1="' + f.L + '" x2="' + (f.W - f.R) + '" y1="' + Y(f, yd, t) + '" y2="' + Y(f, yd, t) + '"/>';
+      s += '<text x="' + (f.L - 8) + '" y="' + (Y(f, yd, t) + 4) + '" text-anchor="end">' + t + '</text>';
+    });
+    s += '<line class="base" x1="' + f.L + '" x2="' + (f.W - f.R) + '" y1="' + (f.H - f.B) + '" y2="' + (f.H - f.B) + '"/>';
+    [[500, "500"], [1000, "1k"], [2000, "2k"], [5000, "5k"], [10000, "10k"], [20000, "20k"], [50000, "50k"]].forEach(function (t) {
+      s += '<text x="' + XL(t[0]) + '" y="' + (f.H - f.B + 17) + '" text-anchor="middle">' + t[1] + '</text>';
+    });
+    s += '<text class="tt" x="' + (f.L + f.iw / 2) + '" y="' + (f.H - 6) + '" text-anchor="middle">Income per person, international dollars</text>';
+    s += '<text class="tt" transform="rotate(-90)" x="' + (-(f.T + f.ih / 2)) + '" y="13" text-anchor="middle">Life expectancy (years)</text>';
+    N.scatter.forEach(function (p) {
+      if (!p[2]) s += '<circle class="' + (p[4] ? "adot" : "gdot") + '" cx="' + XL(p[0]).toFixed(1) + '" cy="' + Y(f, yd, p[1]).toFixed(1) + '" r="3.4"/>';
+    });
+    var fit = N.fit, x0 = N.fit_line.x_min, x1 = N.fit_line.x_max;
+    s += '<line x1="' + XL(x0) + '" y1="' + Y(f, yd, fit.intercept + fit.slope * Math.log10(x0)) + '" x2="' + XL(x1) + '" y2="' + Y(f, yd, fit.intercept + fit.slope * Math.log10(x1)) + '" stroke="var(--ink)" stroke-width="1.4"/>';
+    N.scatter.forEach(function (p) {
+      if (p[2]) {
+        s += '<circle class="f-orange" cx="' + XL(p[0]).toFixed(1) + '" cy="' + Y(f, yd, p[1]).toFixed(1) + '" r="6.5"/>';
+        s += '<text class="ink" x="' + (XL(p[0]) + 11) + '" y="' + (Y(f, yd, p[1]) + 4) + '">Nigeria ' + p[1].toFixed(1) + '</text>';
+        s += '<text x="' + XL(p[0]) + '" y="' + (Y(f, yd, fit.intercept + fit.slope * Math.log10(p[0])) - 9) + '" text-anchor="middle">trend says ' + N.predicted.toFixed(1) + '</text>';
+      }
+    });
+    $("fig-income").innerHTML = s + "</svg>";
+  })();
+  }
+  renderFigs();
+  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(renderFigs, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderFigs);
+
+  /* ---------- hero field: 178 real wines that hover, or fall into a histogram ---------- */
+  var cv = $("field"), ctx = cv.getContext("2d"), root = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var P = D.wine.points.map(function (p, i) {
+    return { px: p[0], py: p[1], c: p[2], alc: p[4], x: 0, y: 0, vy: 0, hx: 0, hy: 0, rx: 0, ry: 0,
+             ph: Math.random() * 6.28, amp: 3 + Math.random() * 6, sp: 0.5 + Math.random() * 0.7 };
+  });
+  var minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity, mina = Infinity, maxa = -Infinity;
+  P.forEach(function (p) {
+    minx = Math.min(minx, p.px); maxx = Math.max(maxx, p.px); miny = Math.min(miny, p.py); maxy = Math.max(maxy, p.py);
+    mina = Math.min(mina, p.alc); maxa = Math.max(maxa, p.alc);
+  });
+  var W = 0, H = 0, R = 4, padX = 30, padB = 38, grounded = false, axisA = 0, col = ["#2740e6", "#e8581c", "#0f8f69"], ink = "#14181b", muted = "#566068", frameN = 0;
+
+  function readColors() {
+    var cs = getComputedStyle(root);
+    col = [cs.getPropertyValue("--blue").trim(), cs.getPropertyValue("--orange").trim(), cs.getPropertyValue("--green").trim()];
+    ink = cs.getPropertyValue("--ink").trim() || ink; muted = cs.getPropertyValue("--muted").trim() || muted;
+  }
+  function layout(snap) {
+    var r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    R = W < 520 ? 3.2 : 4.2; padX = W < 520 ? 16 : 36;
+    var padT = 26, base = H - padB;
+    P.forEach(function (p) {
+      p.hx = padX + (p.px - minx) / (maxx - minx) * (W - 2 * padX);
+      p.hy = padT + (1 - (p.py - miny) / (maxy - miny)) * (base - padT - 14);
+    });
+    var bins = W < 520 ? 10 : 16, bw = (W - 2 * padX) / bins, cols = Math.max(1, Math.floor((bw - 3) / (2 * R + 1.4))), groups = [];
+    for (var b = 0; b < bins; b++) groups.push([]);
+    P.forEach(function (p) {
+      var b = Math.min(bins - 1, Math.floor((p.alc - mina) / (maxa - mina) * bins));
+      groups[b].push(p);
+    });
+    groups.forEach(function (g, b) {
+      g.sort(function (a, c) { return a.c - c.c; });
+      g.forEach(function (p, k) {
+        var cI = k % cols, rI = Math.floor(k / cols);
+        p.rx = padX + b * bw + (cI + 0.5) * (bw / cols);
+        p.ry = base - R - rI * (2 * R + 1.4);
+      });
+    });
+    if (snap) P.forEach(function (p) { p.x = grounded ? p.rx : p.hx; p.y = grounded ? p.ry : p.hy; p.vy = 0; });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (axisA > 0.02) {
+      ctx.globalAlpha = axisA; ctx.strokeStyle = ink; ctx.fillStyle = muted; ctx.lineWidth = 1; ctx.font = "11px 'IBM Plex Mono', monospace"; ctx.textAlign = "center";
+      var base = H - padB;
+      ctx.beginPath(); ctx.moveTo(padX, base + 0.5); ctx.lineTo(W - padX, base + 0.5); ctx.stroke();
+      for (var v = Math.ceil(mina); v <= maxa; v++) {
+        var x = padX + (v - mina) / (maxa - mina) * (W - 2 * padX);
+        ctx.beginPath(); ctx.moveTo(x, base); ctx.lineTo(x, base + 5); ctx.stroke();
+        ctx.fillText(String(v), x, base + 19);
+      }
+      ctx.textAlign = "right"; ctx.fillText("alcohol, % by volume", W - padX, base + 33);
+      ctx.globalAlpha = 1;
+    }
+    for (var i = 0; i < P.length; i++) {
+      var p = P[i];
+      ctx.beginPath(); ctx.arc(p.x, p.y, R, 0, 6.2832);
+      ctx.fillStyle = col[p.c]; ctx.globalAlpha = 0.9; ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function tick(t) {
+    frameN++;
+    if (frameN % 90 === 1) readColors();
+    axisA += ((grounded ? 1 : 0) - axisA) * 0.07;
+    for (var i = 0; i < P.length; i++) {
+      var p = P[i];
+      if (!grounded) {
+        p.x += (p.hx - p.x) * 0.07;
+        p.y += (p.hy + Math.sin(t * 0.0012 * p.sp + p.ph) * p.amp - p.y) * 0.07;
+        p.vy = 0;
+      } else {
+        p.x += (p.rx - p.x) * 0.12;
+        p.vy += 0.6; p.y += p.vy;
+        if (p.y >= p.ry) { p.y = p.ry; p.vy *= -0.28; if (Math.abs(p.vy) < 1.1) p.vy = 0; }
+      }
+    }
+    draw();
+    requestAnimationFrame(tick);
+  }
+
+  var sw = $("gsw"), gs = $("gstate"), cap = $("fcap");
+  var capOff = "178 real wines placed by their chemistry. Each colour is a group the model found without being told the answer. Switch gravity on to drop them.";
+  var capOn = "The same wines, dropped into bins by alcohol content. Switch gravity off to lift them back into the chemistry map.";
+  sw.addEventListener("click", function () {
+    grounded = !grounded;
+    root.classList.toggle("grounded", grounded);
+    sw.setAttribute("aria-checked", String(grounded));
+    gs.textContent = grounded ? "on" : "off";
+    cap.textContent = grounded ? capOn : capOff;
+    if (reduce) { axisA = grounded ? 1 : 0; layout(true); draw(); }
+  });
+
+  readColors(); layout(true); draw();
+  window.addEventListener("resize", function () { layout(true); if (reduce) draw(); });
+  if (!reduce) requestAnimationFrame(tick);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { layout(false); });
+})();
+</script>
+</body>
+</html>
